@@ -1,9 +1,11 @@
+import React, { useState } from 'react';
 import './App.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 function App() {
+  const [value, setValue] = useState("");
   return (
     <Box
       display="flex"
@@ -20,9 +22,17 @@ function App() {
       autoComplete="off"
     >
       <h2> Welcome to Pantry! </h2>
-      <TextField id="Enter ingredients" label="Enter Ingredients" variant="outlined" />
+      <TextField 
+        id="Ingredients" 
+        label="Enter Ingredients" 
+        variant="outlined" 
+        value={value}
+        onChange = {(e) => setValue(e.target.value)}
+      />
       <Button variant="contained">Enter</Button>
       <h3> Ingredient List </h3>
+      <h4> {value} </h4>
+      
 
 
     </Box>
