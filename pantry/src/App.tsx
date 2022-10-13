@@ -3,37 +3,27 @@ import './App.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route}
+    from 'react-router-dom';
+import Home from './pages';
+import Ingredients from './pages/ingredients';
+import Recipes from './pages/recipes';
+import MealPlan from './pages/meal_plan';
+import GroceryList from './pages/grocery_list';
 
 function App() {
-  const [value, setValue] = useState("");
   return (
-    <Box // TODO: change to Grid, makes it easier to format spacing & items in Grid
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-
-      component="form"
-      sx={{
-        flexDirection: "column",
-        p: 1,
-        m: 1
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <h2> Welcome to Pantry! </h2>
-      <TextField 
-        id="Ingredients" 
-        label="Enter Ingredients" 
-        variant="outlined" 
-        value={value}
-        onChange = {(e) => setValue(e.target.value)}
-      />
-      <Button variant="contained">Enter</Button>
-      <h3> Ingredient List </h3>
-      <h4> {value} </h4>
-    
-    </Box>
+    <Router>
+    <Navbar />
+    <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/ingredients' element={<Ingredients/>} />
+        <Route path='/recipes' element={<Recipes/>} />
+        <Route path='/meal_plan' element={<MealPlan/>} />
+        <Route path='/grocery_list' element={<GroceryList/>} />
+    </Routes>
+    </Router>
   );
 }
 
