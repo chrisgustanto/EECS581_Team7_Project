@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 function App() {
   const [value, setValue] = useState("");
   return (
-    <Box
+    <Box // TODO: change to Grid, makes it easier to format spacing & items in Grid
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -32,9 +32,7 @@ function App() {
       <Button variant="contained">Enter</Button>
       <h3> Ingredient List </h3>
       <h4> {value} </h4>
-      
-
-
+    
     </Box>
   );
 }
