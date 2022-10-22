@@ -1,5 +1,5 @@
 export interface DataInterface {
-    name?: string;
+    name: string;
 }
 
 export interface IngredientInterface extends DataInterface {
