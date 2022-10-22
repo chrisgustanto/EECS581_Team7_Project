@@ -4,6 +4,7 @@ export interface DataInterface {
 
 export interface IngredientInterface extends DataInterface {
     quantity?: number;
+    id?: number;
 }
 
 export interface RecipeInterface extends DataInterface {
@@ -13,7 +14,7 @@ export interface RecipeInterface extends DataInterface {
 
 export interface GroceryListInterface extends DataInterface {
     quantity?: number;
-    price?: number;
+    id?: number;
 }
 
 export interface MealPlanInterface extends DataInterface {
