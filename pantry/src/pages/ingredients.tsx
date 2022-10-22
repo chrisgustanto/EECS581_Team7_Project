@@ -3,23 +3,12 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import { IngredientInterface } from "./../interfaces";
 const Ingredients = () => {
   const [value, setValue] = useState("");
 
-  interface Data {
-    name?: string;
-  }
-
-  interface Ingredient extends Data {
-    quantity?: number;
-  }
-
-  interface Recipes extends Data {
-    type?: string;
-    label?: string;
-  }
-
-  interface IngredientList extends Array<Ingredient> {}
+  // array of ingredients used to store data
+  interface IngredientArray extends Array<IngredientInterface> {}
 
   return (
     <Box // TODO: change to Grid, makes it easier to format spacing & items in Grid
