@@ -3,21 +3,23 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
-import { GroceryListInterface } from "./../interfaces";
-
-const GroceryList = () => {
-  // array of grocery lists used to store data
+import { IngredientInterface } from "./../interfaces";
+const Ingredients = () => {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState<number>(0);
   const [id, setId] = useState<number>(0);
 
-  const [myArray, setMyArray] = useState<GroceryListInterface[]>([]);
+  const arr: IngredientInterface[] = []
+  const [myArray, setMyArray] = useState<IngredientInterface[]>([]);
+  
+  // array of ingredients used to store data
+  interface IngredientArray extends Array<IngredientInterface> {}
 
-  //const arr: GroceryListInterface[] = []
+  //const arr: IngredientInterface[] = []
 
 
-  function addGroceries(tempName: string, tempQuantity: number, tempId: number){
-    //create new grocery list object and push it to array
+  function addIngredients(tempName: string, tempQuantity: number, tempId: number){
+    //create new ingredient object and push it to array
     
     let ingr = {name : tempName, quantity : tempQuantity, id : tempId}
     myArray.push(ingr)
@@ -46,33 +48,33 @@ const GroceryList = () => {
       autoComplete="off"
     >
       <h2> Welcome to Pantry! </h2>
-      <h3> Please Enter Your Groceries Here: </h3>
+      <h3> Here it be </h3>
       <TextField
-        id="GroceryNames"
-        label="Enter Grocery Name"
+        id="IngredientNames"
+        label="Enter Ingredient Name"
         variant="outlined"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       
       <TextField
-        id="GroceryQuantities"
-        label="Enter Grocery Quantity"
+        id="IngredientQuantities"
+        label="Enter Ingredient Quantity"
         variant="outlined"
         type = "number"
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
       />
-      <Button onClick={() => (addGroceries(name, quantity, id))}>Enter</Button>
-      <h3> Grocery List </h3>
+      <Button onClick={() => (addIngredients(name, quantity, id))}>Enter</Button>
+      <h3> Ingredient List </h3>
       <div>
         {myArray.map((item)=>(
           <div className="itemDis" key={item.id}>
-            <p>{item.name}    Quantity: {item.quantity}</p>
+            <p>{item.name}    Number:{item.quantity}</p>
           </div>
         ))}
       </div>
     </Box>
   );
- }
-export default GroceryList;
+};
+export default Ingredients;
