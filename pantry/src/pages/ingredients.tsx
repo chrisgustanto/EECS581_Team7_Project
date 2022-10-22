@@ -53,7 +53,7 @@ const Ingredients = () => {
         variant="outlined"
         type = "number"
         value={quantity}
-        onChange={(e) => setQuantity(quantity)}
+        onChange={(e) => setQuantity(Number(e.target.value))}
       />
       <Button onClick={() => addIngredients(name, quantity)}>Enter</Button>
       <h3> Ingredient List </h3>
