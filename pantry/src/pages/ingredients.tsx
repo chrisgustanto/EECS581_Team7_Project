@@ -42,7 +42,7 @@ const Ingredients = () => {
         myArray[i].quantity = tempQuantity
       }
     }
-    window.location.reload();
+    //window.location.reload(); //does not work as we intendend (it clears the data)
   }
 
   return (
