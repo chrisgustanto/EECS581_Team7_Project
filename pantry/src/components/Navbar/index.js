@@ -7,6 +7,9 @@ return (
 	<>
 	<Nav>
 		<NavMenu>
+		<NavLink to="/" activeStyle>
+			Home
+		</NavLink>
 		<NavLink to="/ingredients" activeStyle>
 			Ingredients
 		</NavLink>
