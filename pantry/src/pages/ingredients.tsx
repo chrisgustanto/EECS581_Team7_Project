@@ -13,7 +13,6 @@ const Ingredients = () => {
 
   // array of ingredients used to store data
   //interface IngredientArray extends Array<IngredientInterface> {}
-
   //const arr: IngredientInterface[] = []
 
   function addIngredients(
@@ -22,7 +21,6 @@ const Ingredients = () => {
     tempId: number
   ) {
     //create new ingredient object and push it to array
-    // test comment here
     let ingr = { name: tempName, quantity: tempQuantity, id: tempId };
     myArray.push(ingr);
 
