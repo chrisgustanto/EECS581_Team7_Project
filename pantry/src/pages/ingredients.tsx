@@ -26,11 +26,8 @@ const Ingredients = () => {
     let ingr = { name: tempName, quantity: tempQuantity, id: tempId };
     myArray.push(ingr);
 
-    console.log("-");
     console.log(myArray[tempId]);
-    console.log(myArray[tempId - 1]);
-    console.log(myArray[tempId - 2]);
-    console.log("-");
+    
     setId(id + 1);
   }
 
@@ -46,8 +43,7 @@ const Ingredients = () => {
         myArray[i].quantity = tempQuantity;
       }
     }
-    //testing commit
-    console.log("test");
+    
   }
 
   return (
@@ -64,8 +60,8 @@ const Ingredients = () => {
       noValidate
       autoComplete="off"
     >
-      <h2> Welcome to Pantry! </h2>
-      <h3> Here it be </h3>
+      <h2> Enter your ingredients </h2>
+      
       <TextField
         id="IngredientNames"
         label="Enter Ingredient Name"
