@@ -42,7 +42,8 @@ const Ingredients = () => {
         myArray[i].quantity = tempQuantity
       }
     }
-    
+    //testing commit
+    console.log("test")
   }
 
   return (
