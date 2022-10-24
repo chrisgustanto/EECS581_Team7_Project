@@ -1,18 +1,25 @@
-import React, { useState, Fragment, FunctionComponent } from 'react';
-import { IngredientInterface, RecipeInterface } from '../../interfaces';
-import RecipeCard from './recipeCard';
-import { TextField, Button, Box } from '@mui/material';
+import React, { useState, Fragment, FunctionComponent } from "react";
+import { IngredientInterface, RecipeInterface } from "../../interfaces";
+import RecipeCard from "./recipeCard";
+import { TextField, Button, Box } from "@mui/material";
 // import { MultiSelectCheckBox } from 'multi-select-checkbox/dist/MultiSelectCheckBox';
 
-const Recipes: FunctionComponent<Props> = ({recipeList, ingredientList}) => {
-
-  const [name, setName] = useState('');
+const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
+  const [name, setName] = useState("");
   const [checked, setChecked] = useState<string[]>([]);
-  const [directions, setDirections] = useState('');
+  const [directions, setDirections] = useState("");
   const [idk, setIdk] = useState<number>(0);
 
-  function addRecipe(inputName: string, inputIngredients: string[], inputDirections: string){
-    let recipe = {name: inputName, ingredients: inputIngredients, directions: inputDirections}
+  function addRecipe(
+    inputName: string,
+    inputIngredients: string[],
+    inputDirections: string
+  ) {
+    let recipe = {
+      name: inputName,
+      ingredients: inputIngredients,
+      directions: inputDirections,
+    };
     recipeList.push(recipe);
     console.log(recipeList);
     setIdk(idk + 1);
@@ -30,7 +37,7 @@ const Recipes: FunctionComponent<Props> = ({recipeList, ingredientList}) => {
 
   return (
     <>
-      <Box display='block'>
+      <Box display="block">
         <h2>Add Recipe</h2>
         <TextField
           id="RecipeName"
@@ -39,19 +46,21 @@ const Recipes: FunctionComponent<Props> = ({recipeList, ingredientList}) => {
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
-        <Box display='flex'>
+        <Box display="flex">
           {/* <h4>Ingredient Options: </h4> */}
-          <Box display='block'>
-            {
-              ingredientList.map((ingredient, index) => {
-                return (
-                  <div key={index}>
-                    <input value={ingredient.name} type="checkbox" onChange={handleCheck} />
-                    <span>{ingredient.name}</span>
-                  </div>
-                )
-              })
-            }
+          <Box display="block">
+            {ingredientList.map((ingredient, index) => {
+              return (
+                <div key={index}>
+                  <input
+                    value={ingredient.name}
+                    type="checkbox"
+                    onChange={handleCheck}
+                  />
+                  <span>{ingredient.name}</span>
+                </div>
+              );
+            })}
           </Box>
         </Box>
         <TextField
@@ -61,22 +70,25 @@ const Recipes: FunctionComponent<Props> = ({recipeList, ingredientList}) => {
           value={directions}
           onChange={(event) => setDirections(event.target.value)}
         />
-        <Button onClick={() => addRecipe(name, checked, directions)}>Add</Button>
+        <Button
+          variant="contained"
+          onClick={() => addRecipe(name, checked, directions)}
+        >
+          Add
+        </Button>
       </Box>
-      
+
       <h2>Recipes: </h2>
-      {
-        recipeList.map((recipe, index) => {
-          return <RecipeCard key={index} recipe={recipe} />
-        })
-      }
+      {recipeList.map((recipe, index) => {
+        return <RecipeCard key={index} recipe={recipe} />;
+      })}
     </>
-  )
+  );
 };
 
 interface Props {
-	recipeList: RecipeInterface[]
-  ingredientList: IngredientInterface[]
+  recipeList: RecipeInterface[];
+  ingredientList: IngredientInterface[];
 }
 
 export default Recipes;

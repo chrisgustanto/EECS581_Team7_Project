@@ -64,7 +64,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
         autoComplete="off"
       >
         <Grid item xs={8}>
-          <h1>Enter your ingredients</h1>
+          <h2>Enter your ingredients</h2>
         </Grid>
 
         <Grid item xs={8}>
