@@ -1,5 +1,5 @@
 export interface DataInterface {
-    name: string;
+    name?: string;
 }
 
 export interface IngredientInterface extends DataInterface {
@@ -8,8 +8,8 @@ export interface IngredientInterface extends DataInterface {
 }
 
 export interface RecipeInterface extends DataInterface {
-    type?: string;
-    label?: string;
+    directions?: string;
+    ingredients?: string[];
 }
 
 export interface GroceryListInterface extends DataInterface {

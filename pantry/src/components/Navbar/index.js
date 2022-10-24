@@ -7,21 +7,22 @@ return (
 	<>
 	<Nav>
 		<NavMenu>
-		<NavLink to="/" activeStyle>
-			Home
-		</NavLink>
-		<NavLink to="/ingredients" activeStyle>
-			Ingredients
-		</NavLink>
-		<NavLink to="/recipes" activeStyle>
-			Recipes
-		</NavLink>
-		<NavLink to="/meal_plan" activeStyle>
-			Meal Plan
-		</NavLink>
-		<NavLink to="/grocery_list" activeStyle>
-			Grocery List
-		</NavLink>
+			<NavLink to="/" activeStyle text-decoration='none'>
+				Home
+			</NavLink>
+			<div class="verticalLine"></div>
+			<NavLink to="/ingredients" activeStyle>
+				Ingredients
+			</NavLink>
+			<NavLink to="/recipes" activeStyle>
+				Recipes
+			</NavLink>
+			<NavLink to="/meal_plan" activeStyle>
+				Meal Plan
+			</NavLink>
+			<NavLink to="/grocery_list" activeStyle>
+				Grocery List
+			</NavLink>
 		</NavMenu>
 	</Nav>
 	</>
