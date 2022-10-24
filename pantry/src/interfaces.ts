@@ -20,4 +20,5 @@ export interface GroceryListInterface extends DataInterface {
 export interface MealPlanInterface extends DataInterface {
     day?: string;
     diet?: string;
+    id?: number;
 }
