@@ -1,20 +1,16 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { IngredientInterface } from "./../interfaces";
-const Ingredients = () => {
+const Ingredients: FunctionComponent<Props> = ({ingredientList}) => {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState<number>(0);
   const [id, setId] = useState<number>(0);
 
-  const [myArray, setMyArray] = useState<IngredientInterface[]>([]);
-
   // array of ingredients used to store data
   //interface IngredientArray extends Array<IngredientInterface> {}
-
-  //const arr: IngredientInterface[] = []
 
   function addIngredients(
     tempName: string,
@@ -24,9 +20,9 @@ const Ingredients = () => {
     //create new ingredient object and push it to array
     // test comment here
     let ingr = { name: tempName, quantity: tempQuantity, id: tempId };
-    myArray.push(ingr);
+    ingredientList.push(ingr);
 
-    console.log(myArray[tempId]);
+    console.log(ingredientList[tempId]);
     
     setId(id + 1);
   }
@@ -36,11 +32,11 @@ const Ingredients = () => {
     tempQuantity: number,
     tempId: number
   ) {
-    for (let i = 0; i < myArray.length; i++) {
+    for (let i = 0; i < ingredientList.length; i++) {
       console.log(i);
-      if (myArray[i].name == tempName) {
-        console.log(myArray[i].name);
-        myArray[i].quantity = tempQuantity;
+      if (ingredientList[i].name == tempName) {
+        console.log(ingredientList[i].name);
+        ingredientList[i].quantity = tempQuantity;
       }
     }
     
@@ -84,10 +80,10 @@ const Ingredients = () => {
       </Button>
       <h3> Ingredient List </h3>
       <div>
-        {myArray.map((item) => (
-          <div className="itemDis" key={item.id}>
+        {ingredientList.map((ingredient) => (
+          <div className="itemDis" key={ingredient.id}>
             <p>
-              {item.name} Number:{item.quantity} ID:{item.id}
+              {ingredient.name} {ingredient.quantity}
             </p>
           </div>
         ))}
@@ -95,4 +91,9 @@ const Ingredients = () => {
     </Box>
   );
 };
+
+interface Props {
+	ingredientList: IngredientInterface[]
+}
+
 export default Ingredients;
