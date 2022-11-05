@@ -6,6 +6,25 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { GroceryListInterface } from "./../interfaces";
 
+const baseStyle = {
+  backgroundColor: 'white',
+  width: '225px',
+  marginBottom: '10px',
+  padding: '10px',
+  boxShadow: 'rgb(0,0,0,0.44) 0px 5px 5px', 
+};
+
+const wordStyle = {
+  fontFamily: "Rockwell",
+  color: 'OliveDrab',
+  fontSize: "25px",
+};
+
+const numStyle = {
+  color: 'Black',
+  fontSize: '20px',
+};
+
 const GroceryList = () => {
   // array of grocery lists used to store data
   const [name, setName] = useState("");
@@ -92,9 +111,10 @@ const GroceryList = () => {
         <h3> Grocery List </h3>
         <div>
           {myArray.map((item) => (
-            <div className="itemDis" key={item.id}>
+            <div className="itemDis" key={item.id} style={baseStyle}>
               <p>
-                {item.name} x {item.quantity}
+                <span style={wordStyle}>{item.name}</span>
+                <span style={numStyle}> x {item.quantity}</span>
               </p>
             </div>
           ))}
