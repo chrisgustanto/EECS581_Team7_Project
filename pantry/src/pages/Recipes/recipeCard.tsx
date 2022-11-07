@@ -1,5 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import { IngredientInterface, RecipeInterface } from '../../interfaces';
+import './recipeCard.css';
 
 
 
@@ -10,7 +11,17 @@ const RecipeCard: FunctionComponent<Props> = ({recipe}) => {
 
   return (
 	<>
-		<div>{recipe.name} - {formattedIngredients} - {recipe.directions}</div>
+		<div id='card'>
+			<div id='name'>
+				{recipe.name}
+			</div>
+			<div id='directions'>
+				Directions: {recipe.directions}
+			</div>
+			<div id='ingredients'>
+				Ingredients: {formattedIngredients}
+			</div>
+		</div>
 	</>
   )
 }

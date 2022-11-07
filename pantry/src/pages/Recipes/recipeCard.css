@@ -1,0 +1,19 @@
+#card {
+	display: flex;
+	flex-direction: column;
+	outline: solid;
+	width: auto;
+	margin: 10px;
+}
+
+#name {
+	text-align: center;
+}
+
+#directions {
+	text-align: center;
+}
+
+#ingredients {
+	text-align: center;
+}
