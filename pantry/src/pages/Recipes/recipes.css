@@ -1,0 +1,25 @@
+#custom-recipe-container {
+	width: 400px;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+
+	outline: solid;
+	padding: 20px;
+}
+
+#recipe-name {
+	height: 15px;
+}
+
+#recipe-instructions {
+	height: 200px;
+	margin-top: 10px;
+	text-overflow: false;
+}
+
+#recipe-cards-container {
+	width: 500px;
+	display: flex;
+	flex-direction: column;
+}

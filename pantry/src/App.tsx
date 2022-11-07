@@ -43,17 +43,21 @@ function App() {
     quantity: 9
   }]);
   const [recipeList, setRecipeList] = useState<RecipeInterface[]>([{
-    name: 'quesadilla',
+    name: 'Quesadilla',
     ingredients: ['tortilla', 'chicken', 'cheese'],
     directions: 'Put chicken and cheese in tortilla'
   }, {
-    name: 'cheeseburger',
+    name: 'Cheeseburger',
     ingredients: ['bun', 'beef', 'cheese'],
     directions: 'Put beef and cheese in bun'
   }, {
-    name: 'chocolate cake',
-    ingredients: ['flour', 'egg', 'chocolate'],
-    directions: 'Mix flour, eggs, and chocolate. Bake.'
+    name: 'Quesadilla',
+    ingredients: ['tortilla', 'chicken', 'cheese'],
+    directions: 'Put chicken and cheese in tortilla'
+  }, {
+    name: 'Cheeseburger',
+    ingredients: ['bun', 'beef', 'cheese'],
+    directions: 'Put beef and cheese in bun'
   }]);
 
   return (
