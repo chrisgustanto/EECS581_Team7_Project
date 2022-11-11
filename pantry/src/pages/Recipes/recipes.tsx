@@ -76,6 +76,9 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 					/>
 
 					<TextField
+						multiline
+						minRows={11}
+						maxRows={11}
 						id="recipe-instructions"
 						label="Recipe Instructions"
 						variant="outlined"
