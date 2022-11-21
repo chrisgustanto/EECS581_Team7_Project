@@ -117,7 +117,7 @@ const MealPlan = () => {
         <option>Fruit Salad</option>
         <option>Waffles</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Breakfast", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Tuesday", "Breakfast", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -136,7 +136,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Egg Salad</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Lunch", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Tuesday", "Lunch", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -155,7 +155,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Potato Soup</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Dinner", id)}>Save</Button>  
+      <Button onClick={() => addPlan(name, "Tuesday", "Dinner", id)}>Save</Button>  
 
       <div>
         {myArray.map((item)=>(
@@ -176,7 +176,7 @@ const MealPlan = () => {
         <option>Fruit Salad</option>
         <option>Waffles</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Breakfast", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Wednesday", "Breakfast", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -195,7 +195,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Egg Salad</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Lunch", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Wednesday", "Lunch", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -214,7 +214,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Potato Soup</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Dinner", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Wednesday", "Dinner", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -235,7 +235,7 @@ const MealPlan = () => {
         <option>Fruit Salad</option>
         <option>Waffles</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Breakfast", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Thursday", "Breakfast", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -254,7 +254,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Egg Salad</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Lunch", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Thursday", "Lunch", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -273,7 +273,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Potato Soup</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Dinner", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Thursday", "Dinner", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -294,7 +294,7 @@ const MealPlan = () => {
         <option>Fruit Salad</option>
         <option>Waffles</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Breakfast", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Friday", "Breakfast", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -313,7 +313,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Egg Salad</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Lunch", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Friday", "Lunch", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -332,7 +332,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Potato Soup</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Dinner", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Friday", "Dinner", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -353,7 +353,7 @@ const MealPlan = () => {
         <option>Fruit Salad</option>
         <option>Waffles</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Breakfast", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Saturday", "Breakfast", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -372,7 +372,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Egg Salad</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Lunch", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Saturday", "Lunch", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -391,7 +391,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Potato Soup</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Dinner", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Saturday", "Dinner", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -412,7 +412,7 @@ const MealPlan = () => {
         <option>Fruit Salad</option>
         <option>Waffles</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Breakfast", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Sunday", "Breakfast", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -431,7 +431,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Egg Salad</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Lunch", id)}>Save</Button>
+      <Button onClick={() => addPlan(name, "Sunday", "Lunch", id)}>Save</Button>
 
       <div>
         {myArray.map((item)=>(
@@ -450,7 +450,7 @@ const MealPlan = () => {
         <option>Burritos</option>
         <option>Potato Soup</option>
       </select>
-      <Button onClick={() => addPlan(name, "Monday", "Dinner", id)}>Save</Button> 
+      <Button onClick={() => addPlan(name, "Sunday", "Dinner", id)}>Save</Button> 
 
       <div>
         {myArray.map((item)=>(
