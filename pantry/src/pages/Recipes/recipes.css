@@ -1,11 +1,16 @@
 #custom-recipe-container {
 	width: 400px;
-	height: 400px;
+	height: 420px;
 	display: flex;
 	flex-direction: column;
 
 	outline: solid;
 	padding: 20px;
+}
+
+h3 {
+	margin: 0px;
+	text-align: center;
 }
 
 #recipe-name {
