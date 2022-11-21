@@ -3,15 +3,22 @@ import './recipes.css';
 import Grid from "@mui/material/Grid";
 import { IngredientInterface, RecipeInterface } from "../../interfaces";
 import RecipeCard from "./recipeCard";
+import RecipeList from './recipeList';
 import { TextField, Button, Box } from "@mui/material";
 import Multiselect from 'multiselect-react-dropdown';
+import { json } from "stream/consumers";
+
+// interface Meal {
+// 	title: string;
+// }
 
 
 const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 	const [name, setName] = useState("");
-	const [checked, setChecked] = useState<string[]>([]);
+	const [checkedIngredients, setcheckedIngredients] = useState<string[]>([]);
 	const [directions, setDirections] = useState("");
 	const [idk, setIdk] = useState<number>(0);
+	const [recipeData, setRecipeData] = useState<Object[]>([]);
 
 	function addRecipe(inputName: string, inputIngredients: string[], inputDirections: string) {
 		let recipe = {
@@ -25,18 +32,44 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 	}
 
 	const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-		var updatedList = [...checked];
+		var updatedList = [...checkedIngredients];
 		if (event.target.checked) {
-			updatedList = [...checked, event.target.value];
+			updatedList = [...checkedIngredients, event.target.value];
 		} else {
-			updatedList.splice(checked.indexOf(event.target.value), 1);
+			updatedList.splice(checkedIngredients.indexOf(event.target.value), 1);
 		}
-		setChecked(updatedList);
+		setcheckedIngredients(updatedList);
 	};
 
 	const onSubmit = (data: any) => {
 		console.log(data);
 	};
+
+	function getrecipeData() {
+		let url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=';
+		let key = '&number=12&apiKey=112c9e46de254a86a707eb74c737b3a1';
+		let items = '';
+		for(let i=0; i<checkedIngredients.length; i++) {
+			if(checkedIngredients.length > 1 && i == 0) {
+				items = items + checkedIngredients[i].toLowerCase() + ',';
+			} else {
+				items = items + '+' + checkedIngredients[i].toLowerCase() + ',';
+			} 
+		}
+		items = items.slice(0, items.length - 1); //remove ',' at end of string
+		let finalURL = url + items + key
+
+		fetch(finalURL)
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			setRecipeData(data);
+			// console.log(recipeData);
+		})
+		.catch(() => {
+			console.log("error fetching meal data");
+		})
+	}
 
 
 	return (
@@ -54,6 +87,8 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 				}}
 			>
 				<div id='custom-recipe-container'>
+					<h3>Custom Recipe</h3>
+
 					<TextField
 						id="recipe-name"
 						label="Recipe Name"
@@ -84,21 +119,42 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 					/>
 
 					<Button
-					variant="contained"
-					onClick={() => addRecipe(name, checked, directions)}>
-					Add Recipe
+						variant="contained"
+						onClick={() => addRecipe(name, checkedIngredients, directions)}>
+						Add Recipe
 					</Button>
 
 				</div>
 
-				<Grid item xs={8}>
+				<Box display='block'>
+					{
+						ingredientList.map((ingredient, index) => {
+							return (
+								<div key={index}>
+									<input value={ingredient.name} type="checkbox" onChange={handleCheck} />
+									<span>{ingredient.name}</span>
+								</div>
+							)
+						})
+					}
+				</Box>
+
+				<Button
+					variant='contained'
+					onClick={getrecipeData}>
+					Get Meal Data
+				</Button>
+
+				{recipeData && <RecipeList recipeData={recipeData} />}
+
+				{/* <Grid item xs={8}>
 					<h2>Recipes: </h2>
 					<div id='recipe-cards-container'>
 						{recipeList.map((recipe, index) => {
 							return <RecipeCard key={index} recipe={recipe} />;
 						})}
 					</div>
-				</Grid>
+				</Grid> */}
 			</Grid>
 		</>
 	);
