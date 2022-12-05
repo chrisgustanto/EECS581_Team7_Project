@@ -70,11 +70,7 @@ const GroceryList = () => {
         autoComplete="off"
       >
         <Grid item xs={8}>
-          <h2> Welcome to Pantry! </h2>
-        </Grid>
-
-        <Grid item xs={8}>
-          <h3> Please Enter Your Groceries Here: </h3>
+          <h3 style={wordStyle}> Please Enter Your Groceries: </h3>
         </Grid>
 
         <Grid item xs={8}>
