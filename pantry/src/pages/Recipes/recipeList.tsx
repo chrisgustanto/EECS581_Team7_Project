@@ -1,33 +1,29 @@
 import React, {FunctionComponent} from 'react';
 import Recipe from './recipe';
-
-const wordStyle = {
-	fontFamily: "Rockwell",
-	color: "rgb(210, 132, 33)",
-	fontSize: "25px",
-  };
+import { Grid } from '@mui/material';
+import { apiRecipeInterface } from './RecipeInterface';
+import { NewsHeaderCard } from 'react-ui-cards';
 
 const RecipeList: FunctionComponent<Props> = ({recipeData}) => {
 	// const nutrients = recipeData.nutrients;
 
 	return (
-		<main>
-			<section className='nutrients'>
-				<h1 style={wordStyle}>Macros</h1>
-				<ul>
-					{recipeData.title}
-					{/* <li>Calories: {nutrients.calories.toFixed(0)}</li>
-					<li>Carbohydrates: {nutrients.carbohydrates.toFixed(0)}</li>
-					<li>Fat: {nutrients.fat.toFixed(0)}</li>
-					<li>Protein: {nutrients.protein.toFixed(0)}</li> */}
-				</ul>
-			</section>
-		</main>
+		<Grid container>
+			{
+				recipeData.map((elem) => {
+					return (
+						<Grid item>
+							<NewsHeaderCard title={elem.title} author='' date='' href='' thumbnail={elem.image} />
+						</Grid>
+					)
+				})
+			}
+		</Grid>
 	)
 }
 
 interface Props {
-	recipeData: any
+	recipeData: apiRecipeInterface[]
 }
 
 export default RecipeList;

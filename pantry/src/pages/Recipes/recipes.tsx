@@ -7,10 +7,10 @@ import RecipeList from './recipeList';
 import { TextField, Button, Box } from "@mui/material";
 import Multiselect from 'multiselect-react-dropdown';
 import { json } from "stream/consumers";
+import { apiRecipeInterface } from "./RecipeInterface";
 
-// interface Meal {
-// 	title: string;
-// }
+//https://codesandbox.io/s/9j7m6mmw3o?file=/src/Container/index.js
+
 
 
 const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
@@ -18,7 +18,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 	const [checkedIngredients, setcheckedIngredients] = useState<string[]>([]);
 	const [directions, setDirections] = useState("");
 	const [idk, setIdk] = useState<number>(0);
-	const [recipeData, setRecipeData] = useState<Object[]>([]);
+	const [recipeData, setRecipeData] = useState<apiRecipeInterface[]>([]);
 
 	function addRecipe(inputName: string, inputIngredients: string[], inputDirections: string) {
 		let recipe = {
@@ -57,14 +57,13 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 			} 
 		}
 		items = items.slice(0, items.length - 1); //remove ',' at end of string
-		let finalURL = url + items + key
+		let finalURL = url + items + key;
 
 		fetch(finalURL)
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
 			setRecipeData(data);
-			// console.log(recipeData);
 		})
 		.catch(() => {
 			console.log("error fetching meal data");
@@ -114,6 +113,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 						id="recipe-instructions"
 						label="Recipe Instructions"
 						variant="outlined"
+						multiline
 						value={directions}
 						onChange={(event) => setDirections(event.target.value)}
 					/>
@@ -145,16 +145,8 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 					Get Meal Data
 				</Button>
 
-				{recipeData && <RecipeList recipeData={recipeData} />}
-
-				{/* <Grid item xs={8}>
-					<h2>Recipes: </h2>
-					<div id='recipe-cards-container'>
-						{recipeList.map((recipe, index) => {
-							return <RecipeCard key={index} recipe={recipe} />;
-						})}
-					</div>
-				</Grid> */}
+				{recipeData.length>0 && <RecipeList recipeData={recipeData} />}
+				
 			</Grid>
 		</>
 	);
