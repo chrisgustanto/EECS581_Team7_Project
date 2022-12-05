@@ -1,6 +1,6 @@
 #custom-recipe-container {
 	width: 400px;
-	height: 420px;
+	height: auto;
 	display: flex;
 	flex-direction: column;
 
