@@ -6,6 +6,26 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { IngredientInterface } from "./../interfaces";
 
+const baseStyle = {
+  backgroundColor: "white",
+  width: '225px',
+  marginBottom: '10px',
+  padding: '10px',
+  boxShadow: 'rgb(0,0,0,0.44) 0px 5px 5px', 
+};
+
+const wordStyle = {
+  fontFamily: "Rockwell",
+  color: "rgb(113, 9, 104)",
+  fontSize: "25px",
+};
+
+const numStyle = {
+  color: 'Black',
+  fontSize: '20px',
+  fontFamily: "Helvetica",
+};
+
 const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState<number>();
@@ -64,7 +84,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
         autoComplete="off"
       >
         <Grid item xs={8}>
-          <h2>Enter your ingredients</h2>
+          <h2 style={wordStyle}>Enter Your Ingredients</h2>
         </Grid>
 
         <Grid item xs={8}>
@@ -108,15 +128,14 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
 
         <Grid item xs={8}>
           <h3> Ingredient List </h3>
-          <div>
-            {ingredientList.map((ingredient) => (
-              <div className="itemDis" key={ingredient.id}>
+          {ingredientList.map((item) => (
+              <div className="itemDis" key={item.id} style={baseStyle}>
                 <p>
-                  {ingredient.name} {ingredient.quantity}
+                  <span style={wordStyle}>{item.name}</span>
+                  <span style={numStyle}> x {item.quantity}</span>
                 </p>
               </div>
             ))}
-          </div>
         </Grid>
       </Grid>
     </Box>
