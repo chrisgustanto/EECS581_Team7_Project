@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { GroceryListInterface } from "./../interfaces";
 
 const baseStyle = {
-  backgroundColor: 'white',
+  backgroundColor: "white",
   width: '225px',
   marginBottom: '10px',
   padding: '10px',
@@ -16,7 +16,7 @@ const baseStyle = {
 
 const wordStyle = {
   fontFamily: "Rockwell",
-  color: 'OliveDrab',
+  color: "rgb(9, 113, 18)",
   fontSize: "25px",
 };
 
@@ -55,72 +55,66 @@ const GroceryList = () => {
 
   return (
     <Grid
-      container
-      spacing={2}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      component="form"
-      sx={{
-        flexDirection: "column",
-        p: 1,
-        m: 1,
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <Grid item xs={8}>
-        <h2> Welcome to Pantry! </h2>
-      </Grid>
+        container
+        spacing={2}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        component="form"
+        sx={{
+          flexDirection: "column",
+          p: 1,
+          m: 1,
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <Grid item xs={8}>
+          <h3 style={wordStyle}> Please Enter Your Groceries: </h3>
+        </Grid>
 
-      <Grid item xs={8}>
-        <h3> Please Enter Your Groceries Here: </h3>
-      </Grid>
+        <Grid item xs={8}>
+          <TextField
+            id="GroceryNames"
+            label="Enter Grocery Name"
+            variant="outlined"
+            value={name}
+            onChange={(e) => setName(e.target.value)} />
+        </Grid>
 
-      <Grid item xs={8}>
-        <TextField
-          id="GroceryNames"
-          label="Enter Grocery Name"
-          variant="outlined"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Grid>
+        <Grid item xs={8}>
+          <TextField
+            id="GroceryQuantities"
+            label="Enter Grocery Quantity"
+            variant="outlined"
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))} />
+        </Grid>
 
-      <Grid item xs={8}>
-        <TextField
-          id="GroceryQuantities"
-          label="Enter Grocery Quantity"
-          variant="outlined"
-          type="number"
-          value={quantity}
-          onChange={(e) => setQuantity(Number(e.target.value))}
-        />
-      </Grid>
+        <Grid item xs={8}>
+          <Button
+            variant="contained"
+            onClick={() => addGroceries(name, quantity!, id)}
+          >
+            Enter
+          </Button>
+        </Grid>
 
-      <Grid item xs={8}>
-        <Button
-          variant="contained"
-          onClick={() => addGroceries(name, quantity!, id)}
-        >
-          Enter
-        </Button>
+        <Grid item xs={8}>
+          <h3> Grocery List </h3>
+          <div>
+            {myArray.map((item) => (
+              <div className="itemDis" key={item.id} style={baseStyle}>
+                <p>
+                  <span style={wordStyle}>{item.name}</span>
+                  <span style={numStyle}> x {item.quantity}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </Grid>
       </Grid>
-
-      <Grid item xs={8}>
-        <h3> Grocery List </h3>
-        <div>
-          {myArray.map((item) => (
-            <div className="itemDis" key={item.id} style={baseStyle}>
-              <p>
-                <span style={wordStyle}>{item.name}</span>
-                <span style={numStyle}> x {item.quantity}</span>
-              </p>
-            </div>
-          ))}
-        </div>
-      </Grid>
-    </Grid>
   );
 };
 export default GroceryList;
