@@ -11,9 +11,10 @@ const RecipeList: FunctionComponent<Props> = ({recipeData}) => {
 		<Grid container>
 			{
 				recipeData.map((elem) => {
+					let link = 'https://spoonacular.com/recipes/' + elem.title.replace(' ', '-') + '-' + elem.id;
 					return (
 						<Grid item>
-							<NewsHeaderCard title={elem.title} author='' date='' href='' thumbnail={elem.image} />
+							<NewsHeaderCard title={elem.title} author='' date='' href={link} thumbnail={elem.image} />
 						</Grid>
 					)
 				})
