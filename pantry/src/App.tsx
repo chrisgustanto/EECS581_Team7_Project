@@ -67,7 +67,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/ingredients" element={<Ingredients ingredientList={ingredientList}/>} />
         <Route path="/recipes" element={<Recipes recipeList={recipeList} ingredientList={ingredientList}/>} />
-        <Route path="/meal_plan" element={<MealPlan />} />
+        <Route path="/meal_plan" element={<MealPlan recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/grocery_list" element={<GroceryList />} />
       </Routes>
     </Router>
