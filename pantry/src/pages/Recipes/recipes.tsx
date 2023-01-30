@@ -5,18 +5,16 @@ import { IngredientInterface, RecipeInterface } from "../../interfaces";
 import RecipeCard from "./recipeCard";
 import RecipeList from './recipeList';
 import { TextField, Button, Box } from "@mui/material";
-import Multiselect from 'multiselect-react-dropdown';
 import { json } from "stream/consumers";
 import { apiRecipeInterface } from "./RecipeInterface";
+import FormDialog from "./dialogBox";
 
 //https://codesandbox.io/s/9j7m6mmw3o?file=/src/Container/index.js
 
 
 
 const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
-	const [name, setName] = useState("");
 	const [checkedIngredients, setcheckedIngredients] = useState<string[]>([]);
-	const [directions, setDirections] = useState("");
 	const [idk, setIdk] = useState<number>(0);
 	const [recipeData, setRecipeData] = useState<apiRecipeInterface[]>([]);
 
@@ -85,7 +83,10 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 				m: 1,
 				}}
 			>
-				<div id='custom-recipe-container'>
+
+				<FormDialog ingredientList={ingredientList}></FormDialog>
+
+				{/* <div id='custom-recipe-container'>
 					<h3>Custom Recipe</h3>
 
 					<TextField
@@ -124,7 +125,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 						Add Recipe
 					</Button>
 
-				</div>
+				</div> */}
 
 				<Box display='block'>
 					{
