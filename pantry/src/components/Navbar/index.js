@@ -23,6 +23,9 @@ return (
 			<NavLink to="/grocery_list" activeStyle>
 				Grocery List
 			</NavLink>
+			<NavLink to="/account" activeStyle>
+				Account
+			</NavLink>
 		</NavMenu>
 	</Nav>
 	</>
