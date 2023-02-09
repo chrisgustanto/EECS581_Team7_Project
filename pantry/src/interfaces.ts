@@ -22,3 +22,9 @@ export interface MealPlanInterface extends DataInterface {
     diet?: string;
     id?: number;
 }
+
+export interface SignUpInterface extends DataInterface {
+    username?: string;
+    email?: string;
+    password?: string;
+}
