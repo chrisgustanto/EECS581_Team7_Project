@@ -11,7 +11,7 @@ import Recipes from "./pages/Recipes/recipes";
 import MealPlan from "./pages/meal_plan";
 import GroceryList from "./pages/grocery_list";
 import { IngredientInterface, RecipeInterface } from './interfaces';
-import AccDetails from "./pages/account";
+import SignUp from "./pages/account";
 import handleSubmit from "./handlers/handleSubmit";
 
 
@@ -80,7 +80,7 @@ function App() {
         <Route path="/recipes" element={<Recipes recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/meal_plan" element={<MealPlan recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/grocery_list" element={<GroceryList />} />
-        <Route path="/account" element={<AccDetails/>} />
+        <Route path="/account" element={<SignUp/>} />
       </Routes>
       <form onSubmit={submitHandler}>
         <input type= "text" ref={dataRef} />
