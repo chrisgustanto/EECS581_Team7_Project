@@ -12,6 +12,7 @@ import MealPlan from "./pages/meal_plan";
 import GroceryList from "./pages/grocery_list";
 import { IngredientInterface, RecipeInterface } from './interfaces';
 import SignUp from "./pages/account";
+import Login from "./pages/login";
 
 
 function App() {
@@ -71,6 +72,8 @@ function App() {
         <Route path="/meal_plan" element={<MealPlan recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/grocery_list" element={<GroceryList />} />
         <Route path="/account" element={<SignUp/>} />
+        <Route path="/login" element={<Login/>} />
+
       </Routes>
     </Router>
   );
