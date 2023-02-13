@@ -26,6 +26,9 @@ return (
 			<NavLink to="/account" activeStyle>
 				Account
 			</NavLink>
+			<NavLink to="/login" activeStyle>
+				Login
+			</NavLink>
 		</NavMenu>
 	</Nav>
 	</>
