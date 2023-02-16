@@ -12,9 +12,9 @@ import MealPlan from "./pages/meal_plan";
 import GroceryList from "./pages/grocery_list";
 import { IngredientInterface, RecipeInterface } from './interfaces';
 import SignUp from "./pages/account";
-
 import handleSubmit from "./handlers/handleSubmit";
 import Login from "./pages/login";
+import AddItem from "./handlers/AddItem"; // on change
 
 
 
@@ -91,6 +91,7 @@ function App() {
         <input type= "text" ref={dataRef} />
         <button type = "submit">Save</button>
       </form>
+      
     </Router>
     
   );
