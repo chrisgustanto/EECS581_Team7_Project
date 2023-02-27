@@ -16,6 +16,9 @@ const SignUp = () => {
   const [password, setPassword] =  useState("");
 
   const [myArray, setMyArray] = useState<SignUpInterface[]>([]);
+
+  const [showSignUp, setShowSignUp] = useState(true)
+  const [showAcc, setShowAcc] = useState(false)
                 
   function addUser( 
         tempUsername: string,
@@ -24,8 +27,10 @@ const SignUp = () => {
   ){
         let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
         myArray.push(newUser);
+        setShowSignUp(!showSignUp);
+        setShowAcc(!showAcc);
   }
-    
+
   return (
     <Box // TODO: change to Grid, makes it easier to format spacing & items in Grid
       display="flex"
@@ -41,29 +46,43 @@ const SignUp = () => {
       autoComplete="off"
     >
       <div >
-        {/* <h1 style={wordStyle}>Account Details</h1>
-        <p>Username:</p>
-        <p></p>
-        <p>Email:</p>
-        <p></p> */}
+        {
+          showSignUp && <p>
+            <h2 style={wordStyle}> Sign Up </h2>
 
-        <h2 style={wordStyle}> Sign Up </h2>
+            <form>
+              <label htmlFor="username">username</label>
+              <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username"></input>
+              <p></p>
+              <label htmlFor="email">email</label>
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
+              <p></p>
+              <label htmlFor="confirmEmail">confirm email</label>
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
+              <p></p>
+              <label htmlFor="password">password</label>
+              <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
+              <p></p>
+              <Button variant="contained" onClick={() => addUser(username, email, password)}>Sign Up</Button>
+            </form>
+          </p>
 
-        <form>
-          <label htmlFor="username">username</label>
-          <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username"></input>
-          <p></p>
-          <label htmlFor="email">email</label>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
-          <p></p>
-          <label htmlFor="confirmEmail">confirm email</label>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
-          <p></p>
-          <label htmlFor="password">password</label>
-          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
-          <p></p>
-          <Button variant="contained" onClick={() => addUser(username, email, password)}>Sign Up</Button>
-        </form>
+        }
+
+        {
+          showAcc && <p>
+            <h2 style={wordStyle}>Account Details</h2>
+            <p>Username:</p>
+            <p></p>
+            <p>Email:</p>
+            <p></p>
+          </p>
+        }
+
+        
+
+
+        
       </div>
     </Box>
     );
