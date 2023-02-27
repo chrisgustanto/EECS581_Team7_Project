@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
-
+import { addDoc, collection } from "@firebase/firestore"
+import { firestore } from "../firebase_setup/firebase"
 const wordStyle = {
     fontFamily: "Rockwell",
     color: "rgb(210, 132, 33)",
@@ -12,6 +13,7 @@ const wordStyle = {
 
 const SignUp = () => {
   const [username, setUsername] =  useState("");
+  const [emailConfirmation, setEmailConfirmation] =  useState("");
   const [email, setEmail] =  useState("");
   const [password, setPassword] =  useState("");
 
@@ -20,10 +22,22 @@ const SignUp = () => {
   function addUser( 
         tempUsername: string,
         tempEmail: string,
+        tempEmailConfirmation: string,
         tempPassword: string
   ){
+        if(tempEmail == tempEmailConfirmation){
         let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
+        
+        const ref = collection(firestore, "UserData") // Firebase creates this automaticall 
+        try {
+          addDoc(ref, newUser)
+        } catch (err) {
+          console.log(err)
+        }
         myArray.push(newUser);
+        } else {
+          console.log("email does not match confirmation email")
+        }
   }
     
   return (
@@ -57,12 +71,12 @@ const SignUp = () => {
           <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
           <p></p>
           <label htmlFor="confirmEmail">confirm email</label>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
+          <input value={emailConfirmation} onChange={(e) => setEmailConfirmation(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
           <p></p>
           <label htmlFor="password">password</label>
           <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
           <p></p>
-          <Button variant="contained" onClick={() => addUser(username, email, password)}>Sign Up</Button>
+          <Button variant="contained" onClick={() => addUser(username, email, emailConfirmation, password)}>Sign Up</Button>
         </form>
       </div>
     </Box>
