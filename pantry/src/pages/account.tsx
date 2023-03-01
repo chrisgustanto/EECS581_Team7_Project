@@ -13,7 +13,7 @@ const wordStyle = {
     fontSize: "25px",
   };
 
-const SignUp = () => {
+  const SignUp = () => {
   const auth = getAuth();
   const [username, setUsername] =  useState("");
   const [emailConfirmation, setEmailConfirmation] =  useState("");
@@ -21,6 +21,15 @@ const SignUp = () => {
   const [password, setPassword] =  useState("");
 
   const [myArray, setMyArray] = useState<SignUpInterface[]>([]);
+
+  //https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+  //returns true if input is a valid email
+  const validateEmail = (email: string) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
+  
 
   //para: username, email, emailConfermation, pasword
   //sends user data to firebase
@@ -31,33 +40,43 @@ const SignUp = () => {
         tempEmailConfirmation: string,
         tempPassword: string
   ){
-        if(tempEmail == tempEmailConfirmation){
-
-          let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
-          
-          const ref = collection(firestore, "UserData") // Firebase creates this automaticall 
-          try {
-            addDoc(ref, newUser)
-            console.log("sent user data")
-          } catch (err) {
-            console.log(err)
-          }
-          /*
-          createUserWithEmailAndPassword(auth, tempEmail, tempPassword).then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log("test success")
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-          });
-          */
-          //myArray.push(newUser);
+        if(tempUsername == "" || tempEmail == "" || tempEmailConfirmation == "" || tempPassword == ""){
+          alert("Empty Field")
         } else {
-          console.log("email does not match confirmation email")
+          if(tempEmail == tempEmailConfirmation){
+            if(validateEmail(tempEmail)){
+              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
+            
+            const ref = collection(firestore, "UserData") // Firebase creates this automaticall 
+            try {
+              addDoc(ref, newUser)
+              console.log("sent user data")
+            } catch (err) {
+              console.log(err)
+            }
+            /*
+            createUserWithEmailAndPassword(auth, tempEmail, tempPassword).then((userCredential) => {
+              // Signed in 
+              const user = userCredential.user;
+              console.log("test success")
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              // ..
+            });
+            */
+            //myArray.push(newUser);
+            } else {
+              alert("not valide email")
+            }
+          } else {
+            console.log("email does not match confirmation email")
+            alert("email does not match confirmation email")
+          }
+            
         }
+        
   }
 
   
