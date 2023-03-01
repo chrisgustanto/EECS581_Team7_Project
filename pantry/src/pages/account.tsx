@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
 import { addDoc, collection } from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 const wordStyle = {
     fontFamily: "Rockwell",
     color: "rgb(210, 132, 33)",
@@ -12,13 +14,17 @@ const wordStyle = {
   };
 
 const SignUp = () => {
+  const auth = getAuth();
   const [username, setUsername] =  useState("");
   const [emailConfirmation, setEmailConfirmation] =  useState("");
   const [email, setEmail] =  useState("");
   const [password, setPassword] =  useState("");
 
   const [myArray, setMyArray] = useState<SignUpInterface[]>([]);
-                
+
+  //para: username, email, emailConfermation, pasword
+  //sends user data to firebase
+  //returns: none             
   function addUser( 
         tempUsername: string,
         tempEmail: string,
@@ -26,21 +32,41 @@ const SignUp = () => {
         tempPassword: string
   ){
         if(tempEmail == tempEmailConfirmation){
-        let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
-        
-        const ref = collection(firestore, "UserData") // Firebase creates this automaticall 
-        try {
-          addDoc(ref, newUser)
-        } catch (err) {
-          console.log(err)
-        }
-        myArray.push(newUser);
+
+          let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
+          
+          const ref = collection(firestore, "UserData") // Firebase creates this automaticall 
+          try {
+            addDoc(ref, newUser)
+            console.log("sent user data")
+          } catch (err) {
+            console.log(err)
+          }
+          /*
+          createUserWithEmailAndPassword(auth, tempEmail, tempPassword).then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log("test success")
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+          });
+          */
+          //myArray.push(newUser);
         } else {
           console.log("email does not match confirmation email")
         }
   }
+
+  
+
+
+
     
   return (
+
     <Box // TODO: change to Grid, makes it easier to format spacing & items in Grid
       display="flex"
       alignItems="center"
