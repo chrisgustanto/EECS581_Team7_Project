@@ -3,10 +3,15 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
-import { addDoc, collection } from "@firebase/firestore"
+import { addDoc, collection, getFirestore } from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+
+
+//init services
+const db = getFirestore()
+
 const wordStyle = {
     fontFamily: "Rockwell",
     color: "rgb(210, 132, 33)",
@@ -21,6 +26,9 @@ const wordStyle = {
   const [password, setPassword] =  useState("");
 
   const [myArray, setMyArray] = useState<SignUpInterface[]>([]);
+
+  const [showSignUp, setShowSignUp] = useState(true)
+  const [showAcc, setShowAcc] = useState(false)
 
   //https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
   //returns true if input is a valid email
@@ -47,7 +55,10 @@ const wordStyle = {
             if(validateEmail(tempEmail)){
               let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
             
-            const ref = collection(firestore, "UserData") // Firebase creates this automaticall 
+            const ref = collection(firestore, "UserData") // Firebase creates this automatically 
+            setShowSignUp(!showSignUp);
+            setShowAcc(!showAcc);
+            getUserName()
             try {
               addDoc(ref, newUser)
               console.log("sent user data")
@@ -79,10 +90,21 @@ const wordStyle = {
         
   }
 
-  
+  function logout(){
+    setShowSignUp(!showSignUp);
+    setShowAcc(!showAcc);
+  }
 
+  function getUserName(){
+    //get a single document
+    const docRef = doc(db, 'UserData', '3IWVsBGFFwdPDcjaHTjs')
+    
+    getDoc(docRef)
+      .then((doc) => {
 
-
+        console.log(doc.data(), doc.id)
+      })
+  }
     
   return (
 
@@ -100,29 +122,47 @@ const wordStyle = {
       autoComplete="off"
     >
       <div >
-        {/* <h1 style={wordStyle}>Account Details</h1>
-        <p>Username:</p>
-        <p></p>
-        <p>Email:</p>
-        <p></p> */}
+        {
+          showSignUp && <p>
+            <h2 style={wordStyle}> Sign Up </h2>
 
-        <h2 style={wordStyle}> Sign Up </h2>
+            <form>
+              <label htmlFor="username">username</label>
+              <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username"></input>
+              <p></p>
+              <label htmlFor="email">email</label>
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
+              <p></p>
+              <label htmlFor="confirmEmail">confirm email</label>
+              <input value={emailConfirmation} onChange={(e) => setEmailConfirmation(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
+              <p></p>
+              <label htmlFor="password">password</label>
+              <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
+              <p></p>
+              <Button variant="contained" onClick={() => addUser(username, email, emailConfirmation, password)}>Sign Up</Button>
+            </form>
+          </p>
+            
+        }
+        
+        {
+          showAcc && <p>
+            <h2 style={wordStyle}>Account Details</h2>
+            {/* <p>Username:</p>
+            <p></p>
+            <p>Email:</p>
+            <p></p> */}
+            <form>
+              <label htmlFor="username">username</label>
+              <p></p>
+              <label htmlFor="email">email</label>
+              <p></p>
+            </form>
+            <Button variant="contained" onClick={() => logout()}>Log Out</Button>
+          </p>
+        }
 
-        <form>
-          <label htmlFor="username">username</label>
-          <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username"></input>
-          <p></p>
-          <label htmlFor="email">email</label>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
-          <p></p>
-          <label htmlFor="confirmEmail">confirm email</label>
-          <input value={emailConfirmation} onChange={(e) => setEmailConfirmation(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
-          <p></p>
-          <label htmlFor="password">password</label>
-          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
-          <p></p>
-          <Button variant="contained" onClick={() => addUser(username, email, emailConfirmation, password)}>Sign Up</Button>
-        </form>
+
       </div>
     </Box>
     );
