@@ -5,6 +5,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { GroceryListInterface } from "./../interfaces";
+import { TableContainer } from "@mui/material";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const baseStyle = {
   backgroundColor: "white",
@@ -103,18 +110,26 @@ const GroceryList = () => {
 
         <Grid item xs={8}>
           <h3> Grocery List </h3>
-          <div>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+              <TableRow>
+                <TableCell>Item</TableCell>
+                <TableCell align="right">Quantity</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
             {myArray.map((item) => (
-              <div className="itemDis" key={item.id} style={baseStyle}>
-                <p>
-                  <span style={wordStyle}>{item.name}</span>
-                  <span style={numStyle}> x {item.quantity}</span>
-                </p>
-              </div>
+              <TableRow className="itemDis" key={item.id} style={baseStyle}>
+                <TableCell style={wordStyle}>{item.name}</TableCell>
+                <TableCell align='right' style={numStyle}> x {item.quantity}</TableCell>
+              </TableRow>
             ))}
-          </div>
-        </Grid>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Grid>
+    </Grid>
   );
 };
 export default GroceryList;
