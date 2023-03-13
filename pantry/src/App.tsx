@@ -19,6 +19,8 @@ import AddItem from "./handlers/AddItem"; // on change
 
 
 function App() {
+
+  //example ingredient list
   const [ingredientList, setIngredientList] = useState<IngredientInterface[]>([{
     name: 'chicken',
     quantity: 1

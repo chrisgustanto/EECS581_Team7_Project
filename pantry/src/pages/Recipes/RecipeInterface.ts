@@ -1,3 +1,5 @@
+//auto-generated interface from http request to spoonacular api
+
 export interface apiRecipeInterface {
     id:                    number;
     title:                 string;

@@ -32,6 +32,8 @@ const FormDialog: FunctionComponent<Props> = ({ingredientList}) => {
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
+
+					{/* input for name of custom recipe */}
 					<TextField
 						id="recipe-name"
 						label="Recipe Name"
@@ -39,7 +41,8 @@ const FormDialog: FunctionComponent<Props> = ({ingredientList}) => {
 						value={name}
 						onChange={(event) => setName(event.target.value)}
 					/>
-
+					
+					{/* input for ingredients of custom recipe */}
 					<Multiselect
 						displayValue="key"
 						onKeyPressFn={function noRefCheck(){}}
@@ -52,7 +55,8 @@ const FormDialog: FunctionComponent<Props> = ({ingredientList}) => {
 							})
 						}
 					/>
-
+					
+					{/* input for directions for custom recipe */}
 					<TextField
 						id="recipe-instructions"
 						label="Recipe Instructions"
@@ -71,6 +75,7 @@ const FormDialog: FunctionComponent<Props> = ({ingredientList}) => {
   );
 }
 
+//interface for class parameter
 interface Props {
 	ingredientList: IngredientInterface[];
 }

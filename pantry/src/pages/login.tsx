@@ -16,10 +16,10 @@ const Login = () => {
   const [password, setPassword] =  useState("");
 
   function submit( 
-        email: string,
-        password: string
-  ){
-        //do stuff
+    email: string,
+    password: string
+){
+    //do stuff upon form submission
   }
     
   return (
@@ -39,13 +39,20 @@ const Login = () => {
       <div >
         <h2 style={wordStyle}> Login </h2>
         <form>
+
+          {/* user email input textbox */}
           <label htmlFor="email">email</label>
           <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="johndoe@gmail.com" id="email" name="email"></input>
           <p></p>
+
+          {/* user password input textbox */}
           <label htmlFor="password">password</label>
           <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*******" id="password" name="password"></input>
           <p></p>
+
+          {/* form submission button */}
           <Button variant="contained" onClick={() => submit(email, password)}>Login</Button>
+
         </form>
       </div>
     </Box>

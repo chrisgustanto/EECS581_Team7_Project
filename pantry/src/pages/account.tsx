@@ -30,6 +30,7 @@ const wordStyle = {
   const [showSignUp, setShowSignUp] = useState(true)
   const [showAcc, setShowAcc] = useState(false)
 
+
   //https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
   //returns true if input is a valid email
   const validateEmail = (email: string) => {
@@ -42,12 +43,14 @@ const wordStyle = {
   //para: username, email, emailConfermation, pasword
   //sends user data to firebase
   //returns: none             
+
   function addUser( 
         tempUsername: string,
         tempEmail: string,
         tempEmailConfirmation: string,
         tempPassword: string
   ){
+
         if(tempUsername == "" || tempEmail == "" || tempEmailConfirmation == "" || tempPassword == ""){
           alert("Empty Field")
         } else {
@@ -104,8 +107,9 @@ const wordStyle = {
 
         console.log(doc.data(), doc.id)
       })
+
   }
-    
+
   return (
 
     <Box // TODO: change to Grid, makes it easier to format spacing & items in Grid
@@ -127,18 +131,29 @@ const wordStyle = {
             <h2 style={wordStyle}> Sign Up </h2>
 
             <form>
+
+
+              {/* username input textbox */}
               <label htmlFor="username">username</label>
               <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username"></input>
               <p></p>
+              
+              {/* email input textbox */}
               <label htmlFor="email">email</label>
               <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
               <p></p>
+              
+              {/* confirm email input textbox */}
               <label htmlFor="confirmEmail">confirm email</label>
               <input value={emailConfirmation} onChange={(e) => setEmailConfirmation(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
               <p></p>
+              
+              {/* password input textbox */}
               <label htmlFor="password">password</label>
               <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
               <p></p>
+              
+              {/* form submission button */}
               <Button variant="contained" onClick={() => addUser(username, email, emailConfirmation, password)}>Sign Up</Button>
             </form>
           </p>
@@ -161,6 +176,7 @@ const wordStyle = {
             <Button variant="contained" onClick={() => logout()}>Log Out</Button>
           </p>
         }
+
 
 
       </div>
