@@ -7,10 +7,11 @@ import './recipeCard.css';
 const RecipeCard: FunctionComponent<Props> = ({recipe}) => {
 
 	const formattedIngredients: string[] = [];
-	recipe.ingredients?.forEach(ingredient => formattedIngredients.push(`${ingredient}, `));
+	recipe.ingredients?.forEach(ingredient => formattedIngredients.push(`${ingredient}, `)); //format ingredients to be displayed
 
   return (
 	<>
+		{/* display card for user-created recipes, note this has been replaced by the spoonacular api recipe display card */}
 		<div id='card'>
 			<div id='name'>
 				{recipe.name}
@@ -26,6 +27,7 @@ const RecipeCard: FunctionComponent<Props> = ({recipe}) => {
   )
 }
 
+//interface for class parameter
 interface Props {
 	recipe: RecipeInterface
 }

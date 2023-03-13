@@ -40,15 +40,12 @@ const GroceryList = () => {
 
   const [myArray, setMyArray] = useState<GroceryListInterface[]>([]);
 
-  //const arr: GroceryListInterface[] = []
-
+  //create new grocery list object and push it to array
   function addGroceries(
     tempName: string,
     tempQuantity: number,
     tempId: number
   ) {
-    //create new grocery list object and push it to array
-
     let ingr = { name: tempName, quantity: tempQuantity, id: tempId };
     myArray.push(ingr);
 
@@ -80,6 +77,7 @@ const GroceryList = () => {
           <h3 style={wordStyle}> Please Enter Your Groceries: </h3>
         </Grid>
 
+        {/* grocery name input textbox */}
         <Grid item xs={8}>
           <TextField
             id="GroceryNames"
@@ -89,6 +87,7 @@ const GroceryList = () => {
             onChange={(e) => setName(e.target.value)} />
         </Grid>
 
+        {/* grocery quantity input textbox */}
         <Grid item xs={8}>
           <TextField
             id="GroceryQuantities"
@@ -99,6 +98,7 @@ const GroceryList = () => {
             onChange={(e) => setQuantity(Number(e.target.value))} />
         </Grid>
 
+        {/* submit grocery form button */}
         <Grid item xs={8}>
           <Button
             variant="contained"
@@ -108,6 +108,7 @@ const GroceryList = () => {
           </Button>
         </Grid>
 
+        {/* display grocery list */}
         <Grid item xs={8}>
           <h3> Grocery List </h3>
           <TableContainer component={Paper}>

@@ -14,10 +14,11 @@ import FormDialog from "./dialogBox";
 
 
 const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
+
 	const [checkedIngredients, setcheckedIngredients] = useState<string[]>([]);
-	const [idk, setIdk] = useState<number>(0);
 	const [recipeData, setRecipeData] = useState<apiRecipeInterface[]>([]);
 
+	//add custom recipe to user recipe list, need proper interfacing between user recipes and spoonacular recipes
 	function addRecipe(inputName: string, inputIngredients: string[], inputDirections: string) {
 		let recipe = {
 			name: inputName,
@@ -26,28 +27,28 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 		};
 		recipeList.push(recipe);
 		console.log(recipeList);
-		setIdk(idk + 1);
 	}
 
+	//create array of user-checked ingredients
 	const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-		var updatedList = [...checkedIngredients];
+		var updatedList = [...checkedIngredients]; //add currently checked ingredients to array
 		if (event.target.checked) {
-			updatedList = [...checkedIngredients, event.target.value];
+			updatedList = [...checkedIngredients, event.target.value]; //update array with newly checked ingredients
 		} else {
-			updatedList.splice(checkedIngredients.indexOf(event.target.value), 1);
+			updatedList.splice(checkedIngredients.indexOf(event.target.value), 1); //remove unchecked ingredients
 		}
-		setcheckedIngredients(updatedList);
+		setcheckedIngredients(updatedList); //update class member with updated checked ingredients
 	};
 
-	const onSubmit = (data: any) => {
-		console.log(data);
-	};
+	// const onSubmit = (data: any) => {
+	// 	console.log(data);
+	// };
 
 	function getrecipeData() {
-		let url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=';
-		let key = '&number=12&apiKey=112c9e46de254a86a707eb74c737b3a1';
+		let url = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='; //spoonacular api url
+		let key = '&number=12&apiKey=112c9e46de254a86a707eb74c737b3a1'; //account key
 		let items = '';
-		for(let i=0; i<checkedIngredients.length; i++) {
+		for(let i=0; i<checkedIngredients.length; i++) { //add user-checked ingredients to a string that's properly delimited by commas
 			if(checkedIngredients.length > 1 && i == 0) {
 				items = items + checkedIngredients[i].toLowerCase() + ',';
 			} else {
@@ -55,9 +56,9 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 			} 
 		}
 		items = items.slice(0, items.length - 1); //remove ',' at end of string
-		let finalURL = url + items + key;
+		let finalURL = url + items + key; //put final url together
 
-		fetch(finalURL)
+		fetch(finalURL) //send get request to spoonacular api
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
@@ -84,51 +85,12 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 				}}
 			>
 
-				<FormDialog ingredientList={ingredientList}></FormDialog>
-
-				{/* <div id='custom-recipe-container'>
-					<h3>Custom Recipe</h3>
-
-					<TextField
-						id="recipe-name"
-						label="Recipe Name"
-						variant="outlined"
-						value={name}
-						onChange={(event) => setName(event.target.value)}
-					/>
-
-					<Multiselect
-						displayValue="key"
-						onKeyPressFn={function noRefCheck(){}}
-						onRemove={function noRefCheck(){}}
-						onSearch={function noRefCheck(){}}
-						onSelect={function noRefCheck(){}}
-						options={
-							ingredientList.map(ingredient => {
-								return {key: ingredient.name}
-							})
-						}
-					/>
-
-					<TextField
-						id="recipe-instructions"
-						label="Recipe Instructions"
-						variant="outlined"
-						multiline
-						value={directions}
-						onChange={(event) => setDirections(event.target.value)}
-					/>
-
-					<Button
-						variant="contained"
-						onClick={() => addRecipe(name, checkedIngredients, directions)}>
-						Add Recipe
-					</Button>
-
-				</div> */}
+				{/* custom recipe button */}
+				<FormDialog ingredientList={ingredientList}></FormDialog> 
 
 				<Box display='block'>
 					{
+						//create checkbox for each ingredient in array
 						ingredientList.map((ingredient, index) => {
 							return (
 								<div key={index}>
@@ -140,12 +102,14 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 					}
 				</Box>
 
-				<Button
+				{/* send get request to spoonacular api for recipes containing checked ingredients */}
+				<Button 
 					variant='contained'
 					onClick={getrecipeData}>
 					Get Meal Data
 				</Button>
 
+				{/* display recipes retrieved from spoonacular api */}
 				{recipeData.length>0 && <RecipeList recipeData={recipeData} />}
 				
 			</Grid>
@@ -153,6 +117,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 	);
 };
 
+//recipes class parameter interfaces
 interface Props {
 	recipeList: RecipeInterface[];
 	ingredientList: IngredientInterface[];

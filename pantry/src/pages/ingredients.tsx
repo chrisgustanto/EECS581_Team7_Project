@@ -38,9 +38,6 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
   const [quantity, setQuantity] = useState<number>();
   const [id, setId] = useState<number>(0);
 
-  // array of ingredients used to store data
-  //interface IngredientArray extends Array<IngredientInterface> {}
-
   function addIngredients(
     tempName: string,
     tempQuantity: number,
@@ -55,6 +52,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
     setId(id + 1);
   }
 
+  //update existing ingredient in list
   function updateIngredients(
     tempName: string,
     tempQuantity: number,
@@ -94,6 +92,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
           <h2 style={wordStyle}>Enter Your Ingredients</h2>
         </Grid>
 
+        {/* ingredient name textbox */}
         <Grid item xs={8}>
           <TextField
             id="IngredientNames"
@@ -104,6 +103,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
           />
         </Grid>
 
+        {/* ingredient quantity textbox */}
         <Grid item xs={8}>
           <TextField
             id="IngredientQuantities"
@@ -115,6 +115,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
           />
         </Grid>
 
+        {/* add ingredient to list button */}
         <Grid item xs={8}>
           <Button
             variant="contained"
@@ -124,6 +125,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
           </Button>
         </Grid>
 
+        {/* update existing ingredient in list button */}
         <Grid item xs={8}>
           <Button
             variant="contained"
@@ -133,6 +135,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
           </Button>
         </Grid>
 
+        {/* display ingredient list */}
         <Grid item xs={8}>
           <h3> Ingredient List </h3>
           <TableContainer component={Paper}>
