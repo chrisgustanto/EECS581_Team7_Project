@@ -5,14 +5,16 @@ import { apiRecipeInterface } from './RecipeInterface';
 import { NewsHeaderCard } from 'react-ui-cards';
 
 const RecipeList: FunctionComponent<Props> = ({recipeData}) => {
-	// const nutrients = recipeData.nutrients;
 
 	return (
 		<Grid container>
 			{
+				//display cards for recipes retrieved from spoonacular api
 				recipeData.map((elem) => {
+					//create link that takes user to the specific recipe page on the spoonacular website which displays a lot more dietary information
 					let link = 'https://spoonacular.com/recipes/' + elem.title.replace(' ', '-') + '-' + elem.id;
 					return (
+						//create display card
 						<Grid item>
 							<NewsHeaderCard title={elem.title} author='' date='' href={link} thumbnail={elem.image} />
 						</Grid>
@@ -23,6 +25,7 @@ const RecipeList: FunctionComponent<Props> = ({recipeData}) => {
 	)
 }
 
+//class parameter interface
 interface Props {
 	recipeData: apiRecipeInterface[]
 }

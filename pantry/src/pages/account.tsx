@@ -51,19 +51,30 @@ const SignUp = () => {
             <h2 style={wordStyle}> Sign Up </h2>
 
             <form>
+
+              {/* username input textbox */}
               <label htmlFor="username">username</label>
               <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username"></input>
               <p></p>
+
+              {/* email input textbox */}
               <label htmlFor="email">email</label>
               <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
               <p></p>
+
+              {/* confirm email input textbox */}
               <label htmlFor="confirmEmail">confirm email</label>
               <input value={email} onChange={(e) => setEmail(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
               <p></p>
+
+              {/* password input textbox */}
               <label htmlFor="password">password</label>
               <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
               <p></p>
+
+              {/* form submission button */}
               <Button variant="contained" onClick={() => addUser(username, email, password)}>Sign Up</Button>
+
             </form>
           </p>
 
