@@ -89,10 +89,6 @@ function App() {
         <Route path="/login" element={<Login/>} />
 
       </Routes>
-      <form onSubmit={submitHandler}>
-        <input type= "text" ref={dataRef} />
-        <button type = "submit">Save</button>
-      </form>
       
     </Router>
     
