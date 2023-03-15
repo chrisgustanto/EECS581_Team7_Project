@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
 import { addDoc, collection, getFirestore } from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 
@@ -61,7 +61,7 @@ const wordStyle = {
             const ref = collection(firestore, "UserData") // Firebase creates this automatically 
             setShowSignUp(!showSignUp);
             setShowAcc(!showAcc);
-            getUserName()
+            // getUserData()
             try {
               addDoc(ref, newUser)
               console.log("sent user data")
@@ -94,21 +94,32 @@ const wordStyle = {
   }
 
   function logout(){
+    signOut(auth)
+      .then(() => {
+        console.log("the user signed out")
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+
     setShowSignUp(!showSignUp);
     setShowAcc(!showAcc);
   }
 
-  function getUserName(){
-    //get a single document
-    const docRef = doc(db, 'UserData', '3IWVsBGFFwdPDcjaHTjs')
+  // function getUserData(){
+  //   //get a single document
+  //   // const docRef = doc(db, 'UserData', '3IWVsBGFFwdPDcjaHTjs')
     
-    getDoc(docRef)
-      .then((doc) => {
+  //   // getDoc(docRef)
+  //   //   .then((doc) => {
 
-        console.log(doc.data(), doc.id)
-      })
+  //   //     console.log(doc.data(), doc.id)
+  //   //   })
+    
+  //   console.log(email);
+  //   console.log(username);
 
-  }
+  // }
 
   return (
 
@@ -168,9 +179,9 @@ const wordStyle = {
             <p>Email:</p>
             <p></p> */}
             <form>
-              <label htmlFor="username">username</label>
+              <label htmlFor="username">username: {username}</label>
               <p></p>
-              <label htmlFor="email">email</label>
+              <label htmlFor="email">email: {email}</label>
               <p></p>
             </form>
             <Button variant="contained" onClick={() => logout()}>Log Out</Button>

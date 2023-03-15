@@ -2,7 +2,14 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import { addDoc, collection, getFirestore } from "@firebase/firestore"
+import { firestore } from "../firebase_setup/firebase"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+
+//init services
+const db = getFirestore()
+
 const wordStyle = {
     fontFamily: "Rockwell",
     color: "rgb(210, 132, 33)",
@@ -12,14 +19,21 @@ const wordStyle = {
 //para: email pasword
 //returns: none
 const Login = () => {
+  const auth = getAuth();
   const [email, setEmail] =  useState("");
   const [password, setPassword] =  useState("");
 
   function submit( 
     email: string,
     password: string
-){
-    //do stuff upon form submission
+  ){
+    signInWithEmailAndPassword(auth, email, password)
+      .then((cred) => {
+        console.log("user logged in: ", cred.user)
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
   }
     
   return (
@@ -42,7 +56,7 @@ const Login = () => {
 
           {/* user email input textbox */}
           <label htmlFor="email">email</label>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="johndoe@gmail.com" id="email" name="email"></input>
+          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
           <p></p>
 
           {/* user password input textbox */}
