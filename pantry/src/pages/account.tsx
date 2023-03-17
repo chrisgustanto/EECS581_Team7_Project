@@ -7,10 +7,12 @@ import { addDoc, collection, getFirestore } from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { colors } from "@mui/material";
 
 
 //init services
 const db = getFirestore()
+const auth = getAuth()
 
 const wordStyle = {
     fontFamily: "Rockwell",
@@ -19,7 +21,6 @@ const wordStyle = {
   };
 
   const SignUp = () => {
-  const auth = getAuth();
   const [username, setUsername] =  useState("");
   const [emailConfirmation, setEmailConfirmation] =  useState("");
   const [email, setEmail] =  useState("");
@@ -68,18 +69,15 @@ const wordStyle = {
             } catch (err) {
               console.log(err)
             }
-            /*
-            createUserWithEmailAndPassword(auth, tempEmail, tempPassword).then((userCredential) => {
-              // Signed in 
-              const user = userCredential.user;
-              console.log("test success")
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              // ..
-            });
-            */
+            
+            createUserWithEmailAndPassword(auth, tempEmail, tempPassword)
+              .then((userCredential) => {
+                console.log("user created: ", userCredential.user)
+              })
+              .catch((err) => {
+                console.log(err.message)
+              });
+
             //myArray.push(newUser);
             } else {
               alert("not valide email")

@@ -10,6 +10,7 @@ import { doc, getDoc } from "firebase/firestore";
 //init services
 const db = getFirestore()
 
+
 const wordStyle = {
     fontFamily: "Rockwell",
     color: "rgb(210, 132, 33)",
@@ -19,7 +20,7 @@ const wordStyle = {
 //para: email pasword
 //returns: none
 const Login = () => {
-  const auth = getAuth();
+  const auth = getAuth()
   const [email, setEmail] =  useState("");
   const [password, setPassword] =  useState("");
 
@@ -28,8 +29,8 @@ const Login = () => {
     password: string
   ){
     signInWithEmailAndPassword(auth, email, password)
-      .then((cred) => {
-        console.log("user logged in: ", cred.user)
+      .then((userCredential) => {
+        console.log("user logged in: ", userCredential)
       })
       .catch((err) => {
         console.log(err.message)
