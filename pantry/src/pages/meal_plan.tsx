@@ -149,12 +149,13 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
                 </p>
               </div>
             ))}
-        </Grid>  
+        </Grid>
+      <h3> Choose Your Meals For The Week: </h3> 
+      <div className="flexbox-container">
 
-      <h3> Choose Your Meals For The Week: </h3>
-
+      <div>
       <h3>Monday Meals</h3>
-
+      
       <option>Select Breakfast</option>
       <select value={bmname} onChange={e=>setBMName(e.target.value)}>
         <option></option>
@@ -185,8 +186,10 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
         <option>Potato Soup</option>
       </select>
       <Button onClick={() => addPlan2(bmname, lmname, dmname, "Monday", id)}>Save</Button>
+      </div>
 
 {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+      <div>
       <h3>Tuesday Meals</h3>
 
       <option>Select Breakfast</option>
@@ -219,8 +222,10 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
         <option>Potato Soup</option>
       </select>
       <Button onClick={() => addPlan2(btname, ltname, dtname, "Tuesday", id)}>Save</Button>  
+      </div>
 
 {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+      <div>
       <h3>Wednesday Meals</h3>
 
       <option>Select Breakfast</option>
@@ -253,8 +258,10 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
         <option>Potato Soup</option>
       </select>
       <Button onClick={() => addPlan2(bwname, lwname, dwname, "Wednesday", id)}>Save</Button>
+      </div>
 
 {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+      <div>
       <h3>Thursday Meals</h3>
 
       <option>Select Breakfast</option>
@@ -287,8 +294,10 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
         <option>Potato Soup</option>
       </select>
       <Button onClick={() => addPlan2(bhname, lhname, dhname, "Thursday", id)}>Save</Button>
+      </div>
 
 {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+      <div>
       <h3>Friday Meals</h3>
 
       <option>Select Breakfast</option>
@@ -321,8 +330,10 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
         <option>Potato Soup</option>
       </select>
       <Button onClick={() => addPlan2(bfname, lfname, dfname, "Friday", id)}>Save</Button>
+      </div>
 
 {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+      <div>
       <h3>Saturday Meals</h3>
 
       <option>Select Breakfast</option>
@@ -355,8 +366,10 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
         <option>Potato Soup</option>
       </select>
       <Button onClick={() => addPlan2(bsname, lsname, dsname, "Saturday", id)}>Save</Button>
+      </div>
 
 {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+      <div>
       <h3>Sunday Meals</h3>
 
       <option>Select Breakfast</option>
@@ -389,6 +402,8 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
         <option>Potato Soup</option>
       </select>
       <Button onClick={() => addPlan2(buname, luname, duname, "Sunday", id)}>Save</Button> 
+      </div>
+      </div>
 
       {/* <div>
         {myArray.map((item)=>(
