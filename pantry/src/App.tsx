@@ -11,9 +11,10 @@ import Recipes from "./pages/Recipes/recipes";
 import MealPlan from "./pages/meal_plan";
 import GroceryList from "./pages/grocery_list";
 import { IngredientInterface, RecipeInterface } from './interfaces';
-import SignUp from "./pages/account";
+import SignUp from "./pages/signup";
 import handleSubmit from "./handlers/handleSubmit";
 import Login from "./pages/login";
+import Account from "./pages/account";
 import AddItem from "./handlers/AddItem"; // on change
 
 
@@ -85,7 +86,8 @@ function App() {
         <Route path="/recipes" element={<Recipes recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/meal_plan" element={<MealPlan recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/grocery_list" element={<GroceryList />} />
-        <Route path="/account" element={<SignUp/>} />
+        <Route path="/account" element={<Account/>} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login/>} />
 
       </Routes>

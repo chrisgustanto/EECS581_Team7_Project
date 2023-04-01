@@ -4,193 +4,127 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
 import { addDoc, collection, getFirestore } from "@firebase/firestore"
-import { firestore } from "../firebase_setup/firebase"
+import { firestore, firebaseApp, db } from "../firebase_setup/firebase"
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { colors } from "@mui/material";
+import { fireEvent } from "@testing-library/react";
+import { FirebaseError } from "firebase/app";
 
 
 //init services
-const db = getFirestore()
+//const db = getFirestore()
 const auth = getAuth()
 
 const wordStyle = {
     fontFamily: "Rockwell",
     color: "rgb(210, 132, 33)",
     fontSize: "25px",
-  };
-
-  const SignUp = () => {
-  const [username, setUsername] =  useState("");
-  const [emailConfirmation, setEmailConfirmation] =  useState("");
-  const [email, setEmail] =  useState("");
-  const [password, setPassword] =  useState("");
-
-  const [myArray, setMyArray] = useState<SignUpInterface[]>([]);
-
-  const [showSignUp, setShowSignUp] = useState(true)
-  const [showAcc, setShowAcc] = useState(false)
-
-
-  //https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-  //returns true if input is a valid email
-  const validateEmail = (email: string) => {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  };
-  
-
-  //para: username, email, emailConfermation, pasword
-  //sends user data to firebase
-  //returns: none             
-
-  function addUser( 
-        tempUsername: string,
-        tempEmail: string,
-        tempEmailConfirmation: string,
-        tempPassword: string
-  ){
-
-        if(tempUsername == "" || tempEmail == "" || tempEmailConfirmation == "" || tempPassword == ""){
-          alert("Empty Field")
-        } else {
-          if(tempEmail == tempEmailConfirmation){
-            if(validateEmail(tempEmail)){
-              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
-            
-            const ref = collection(firestore, "UserData") // Firebase creates this automatically 
-            setShowSignUp(!showSignUp);
-            setShowAcc(!showAcc);
-            // getUserData()
-            try {
-              addDoc(ref, newUser)
-              console.log("sent user data")
-            } catch (err) {
-              console.log(err)
-            }
-            
-            createUserWithEmailAndPassword(auth, tempEmail, tempPassword)
-              .then((userCredential) => {
-                console.log("user created: ", userCredential.user)
-              })
-              .catch((err) => {
-                console.log(err.message)
-              });
-
-            //myArray.push(newUser);
-            } else {
-              alert("not valide email")
-            }
-          } else {
-            console.log("email does not match confirmation email")
-            alert("email does not match confirmation email")
-          }
-            
-        }
-        
-  }
-
-  function logout(){
-    signOut(auth)
-      .then(() => {
-        console.log("the user signed out")
-      })
-      .catch((err) => {
-        console.log(err.message)
-      })
-
-    setShowSignUp(!showSignUp);
-    setShowAcc(!showAcc);
-  }
-
-  // function getUserData(){
-  //   //get a single document
-  //   // const docRef = doc(db, 'UserData', '3IWVsBGFFwdPDcjaHTjs')
-    
-  //   // getDoc(docRef)
-  //   //   .then((doc) => {
-
-  //   //     console.log(doc.data(), doc.id)
-  //   //   })
-    
-  //   console.log(email);
-  //   console.log(username);
-
-  // }
-
-  return (
-
-    <Box // TODO: change to Grid, makes it easier to format spacing & items in Grid
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      component="form"
-      sx={{
-        flexDirection: "column",
-        p: 1,
-        m: 1,
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div >
-        {
-          showSignUp && <p>
-            <h2 style={wordStyle}> Sign Up </h2>
-
-            <form>
-
-
-              {/* username input textbox */}
-              <label htmlFor="username">username</label>
-              <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username"></input>
-              <p></p>
-              
-              {/* email input textbox */}
-              <label htmlFor="email">email</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email"></input>
-              <p></p>
-              
-              {/* confirm email input textbox */}
-              <label htmlFor="confirmEmail">confirm email</label>
-              <input value={emailConfirmation} onChange={(e) => setEmailConfirmation(e.target.value)} type="confirmEmail" placeholder="yourEmail@gmail.com" id="confirmEmail" name="confirmEmail"></input>
-              <p></p>
-              
-              {/* password input textbox */}
-              <label htmlFor="password">password</label>
-              <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="**********" id="password" name="password"></input>
-              <p></p>
-              
-              {/* form submission button */}
-              <Button variant="contained" onClick={() => addUser(username, email, emailConfirmation, password)}>Sign Up</Button>
-            </form>
-          </p>
-            
-        }
-        
-        {
-          showAcc && <p>
-            <h2 style={wordStyle}>Account Details</h2>
-            {/* <p>Username:</p>
-            <p></p>
-            <p>Email:</p>
-            <p></p> */}
-            <form>
-              <label htmlFor="username">username: {username}</label>
-              <p></p>
-              <label htmlFor="email">email: {email}</label>
-              <p></p>
-            </form>
-            <Button variant="contained" onClick={() => logout()}>Log Out</Button>
-          </p>
-        }
-
-
-
-      </div>
-    </Box>
-    );
 };
 
-export default SignUp;
+const Account = () => {
+      
+      // const [myUser,setCurrentUser] = useState(auth.currentUser || null)
+      const [currentUsername,setCurrentUsername] = useState()
+      const [currentEmail,setCurrentEmail] = useState()
+      
+      // const user = auth.currentUser;
+
+      // setCurrentUser(auth.currentUser)
+      
+      // if(user != null){
+      //       const username = user.displayName;
+      //       const email = user.email;
+      //       const uid = user.uid;
+      // } else {
+      //       console.log("No user is signed in");
+      // }
+      
+      // const myUser = auth.currentUser;
+
+      // get a single document
+      // const docRef = doc(db, "UserData", )
+
+      onAuthStateChanged(auth, (user) => {
+            if(user){
+                  const userUID = user.uid;
+                  const myusername = user.displayName;
+                  const email = user.email;
+                  console.log(myusername);
+                  console.log(email);
+
+                  const docRef = doc(db, "UserData", user.uid)
+
+                  getDoc(docRef)
+                        .then((doc) => {
+                              console.log("user data: ")
+                              console.log(doc.data(), doc.id)
+                              if(doc.exists()){
+                                    console.log("this username: ")
+                                    console.log(doc.data().username)
+                                    setCurrentUsername(doc.data().username)
+                                    setCurrentEmail(doc.data().email)
+                              } else {
+                                    console.log("empty doc")
+                              }
+                        })
+
+                  // onSnapshot(docRef, (doc) => {
+                  //       console.log(doc.data(), doc.id)
+                  // })
+            } else {
+                  console.log("No user is signed in");
+            }
+      })
+      
+
+      // useEffect(() => {
+      //       onAuthStateChanged(auth, (user) => {
+      //             if(user){
+      //                   // const userUID = user.uid;
+                        
+      //             } else {
+      //                   console.log("No user is signed in");
+      //             }
+      //       })
+      // }, [])
+
+      function logout(){
+            console.log("logged out");
+            window.location.replace('http://localhost:3000/login');
+      }
+
+      return (
+            <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            component="form"
+            sx={{
+            flexDirection: "column",
+            p: 1,
+            m: 1,
+            }}
+            noValidate
+            autoComplete="off"
+            >
+            
+            <div >
+            <h2 style={wordStyle}>Account Details</h2>
+
+            <form>
+            <label htmlFor="username">username: {currentUsername}</label>
+            <p></p>
+            <label htmlFor="email">email: {currentEmail}</label>
+            <p></p>
+            </form>
+            <Button variant="contained" onClick={() => logout()}>Log Out</Button>
+            </div>
+            </Box>
+      );
+
+};
+     
+
+export default Account;
+
