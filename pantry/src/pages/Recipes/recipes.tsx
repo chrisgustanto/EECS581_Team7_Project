@@ -106,7 +106,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 				<Button 
 					variant='contained'
 					onClick={getrecipeData}>
-					Get Meal Data
+					Get Recipes
 				</Button>
 
 				{/* display recipes retrieved from spoonacular api */}

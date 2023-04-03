@@ -1,19 +1,28 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
 import { addDoc, collection, getFirestore } from "@firebase/firestore"
-import { firestore, firebaseApp, db } from "../firebase_setup/firebase"
+// import { firestore, firebaseApp, db } from "../firebase_setup/firebase"
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { colors } from "@mui/material";
 import {Routes, Route, useNavigate} from 'react-router-dom';
+import { IngredientInterface } from "./../interfaces";
 //import firebase from "@firebase/firestore";
+
+import { firebaseApp } from "../firebase_setup/firebase";
+import { db } from "../firebase_setup/firebase";
+
+
+interface Props {
+  ingredientList: IngredientInterface[];
+}
 
 //init services
 // const db = getFirestore(firebaseApp)
-const auth = getAuth()
+const auth = getAuth(firebaseApp)
 
 const wordStyle = {
     fontFamily: "Rockwell",
@@ -21,7 +30,7 @@ const wordStyle = {
     fontSize: "25px",
 };
 
-  const SignUp = () => {
+  const SignUp: FunctionComponent<Props> = ({ ingredientList }) => {
   const [username, setUsername] =  useState("");
   const [emailConfirmation, setEmailConfirmation] =  useState("");
   const [email, setEmail] =  useState("");
@@ -60,7 +69,7 @@ const wordStyle = {
         } else {
           if(tempEmail == tempEmailConfirmation){
             if(validateEmail(tempEmail)){
-              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
+              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword, ingredientList: ingredientList };
               
               // const ref = collection(firestore, "UserData")
 

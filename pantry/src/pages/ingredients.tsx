@@ -14,12 +14,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { addDoc, collection, getFirestore } from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { doc, getDoc, setDoc, getDocs } from "firebase/firestore";
+
+import { firebaseApp } from "../firebase_setup/firebase";
+import { db } from "../firebase_setup/firebase";
 
 //init services
-// const db = getFirestore()
-// const auth = getAuth()
+const auth = getAuth(firebaseApp);
 
 const baseStyle = {
   backgroundColor: "white",
@@ -58,13 +60,14 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
     console.log(ingredientList[tempId]);
 
     setId(id + 1);
+
+    checkLoggedIn();
   }
 
   //update existing ingredient in list
   function updateIngredients(
     tempName: string,
     tempQuantity: number,
-    tempId: number
   ) {
     for (let i = 0; i < ingredientList.length; i++) {
       console.log(i);
@@ -73,6 +76,37 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
         ingredientList[i].quantity = tempQuantity;
       }
     }
+
+    checkLoggedIn();
+  }
+
+  function checkLoggedIn(): boolean {
+    auth.onAuthStateChanged(user => {
+      if(user) {
+        console.log('logged in');
+        updateDatabase(user.email!);
+        return true;
+      } else {
+        console.log('not logged in');
+        return false;
+      }
+    })
+    return false;
+  }
+
+  function updateDatabase(userEmail: string) {
+    // console.log(auth.currentUser);
+    const colRef = collection(db, 'UserData');
+    getDocs(colRef).then(querySnap => {
+      querySnap.docs.forEach(docSnap => {
+        // console.log(docSnap.data());
+        if(docSnap.data().email == userEmail) {
+          // console.log(docSnap.data());
+          let newUserData = {...docSnap.data(), ingredientList: ingredientList};
+          setDoc(doc(db, 'UserData', auth.currentUser!.uid), newUserData);
+        }
+      })
+    })
   }
 
   function clearIngredientList() {
@@ -137,7 +171,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
         <Grid item xs={8}>
           <Button
             variant="contained"
-            onClick={() => updateIngredients(name, quantity!, id)}
+            onClick={() => updateIngredients(name, quantity!)}
           >
             Update
           </Button>

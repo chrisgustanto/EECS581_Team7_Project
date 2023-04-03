@@ -19,6 +19,8 @@ import AddItem from "./handlers/AddItem"; // on change
 
 
 
+
+
 function App() {
 
   //example ingredient list
@@ -87,7 +89,7 @@ function App() {
         <Route path="/meal_plan" element={<MealPlan recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/grocery_list" element={<GroceryList />} />
         <Route path="/account" element={<Account/>} />
-        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/signup" element={<SignUp ingredientList={ingredientList}/>} />
         <Route path="/login" element={<Login/>} />
 
       </Routes>
