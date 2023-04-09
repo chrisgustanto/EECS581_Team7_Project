@@ -11,7 +11,11 @@ import FormDialog from "./dialogBox";
 
 //https://codesandbox.io/s/9j7m6mmw3o?file=/src/Container/index.js
 
-
+const wordStyle = {
+	fontFamily: "Rockwell",
+	color: "rgb(113, 9, 104)",
+	fontSize: "25px",
+  };
 
 const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 
@@ -95,7 +99,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 							return (
 								<div key={index}>
 									<input value={ingredient.name} type="checkbox" onChange={handleCheck} />
-									<span>{ingredient.name}</span>
+									<span style={wordStyle}>{ingredient.name}</span>
 								</div>
 							)
 						})
