@@ -6,10 +6,10 @@ import { addDoc, collection, getFirestore } from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 //init services
 const db = getFirestore()
-
 
 const wordStyle = {
     fontFamily: "Rockwell",
@@ -24,6 +24,8 @@ const Login = () => {
   const [email, setEmail] =  useState("");
   const [password, setPassword] =  useState("");
 
+  const navigate = useNavigate();
+
   function submit( 
     email: string,
     password: string
@@ -31,10 +33,17 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("user logged in: ", userCredential)
+        navigateToAccount()
       })
       .catch((err) => {
         console.log(err.message)
       })
+
+      
+  }
+
+  function navigateToAccount(){
+    navigate('/account')
   }
     
   return (
@@ -63,6 +72,9 @@ const Login = () => {
           {/* user password input textbox */}
           <label htmlFor="password">password</label>
           <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*******" id="password" name="password"></input>
+          <p></p>
+
+          <a style={{ fontSize: 14 }} href="http://localhost:3000/signup">Go to Sign Up</a>
           <p></p>
 
           {/* form submission button */}

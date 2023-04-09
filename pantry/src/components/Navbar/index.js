@@ -23,11 +23,11 @@ return (
 			<NavLink to="/grocery_list" activeStyle>
 				Grocery List
 			</NavLink>
-			<NavLink to="/account" activeStyle>
+			{/* <NavLink to="/signup" activeStyle>
 				Account
-			</NavLink>
+			</NavLink> */}
 			<NavLink to="/login" activeStyle>
-				Login
+				Account
 			</NavLink>
 		</NavMenu>
 	</Nav>

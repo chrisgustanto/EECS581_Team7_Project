@@ -12,6 +12,14 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { addDoc, collection, getFirestore } from "@firebase/firestore"
+import { firestore } from "../firebase_setup/firebase"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+
+//init services
+// const db = getFirestore()
+// const auth = getAuth()
 
 const baseStyle = {
   backgroundColor: "white",
