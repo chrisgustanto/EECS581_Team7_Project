@@ -19,6 +19,8 @@ import AddItem from "./handlers/AddItem"; // on change
 
 
 
+
+
 function App() {
 
   //example ingredient list
@@ -50,6 +52,9 @@ function App() {
     name: 'chocolate',
     quantity: 9
   }]);
+
+  const [groceryList, setGroceryList] = useState<IngredientInterface[]>([]);
+
   const [recipeList, setRecipeList] = useState<RecipeInterface[]>([{
     name: 'Quesadilla',
     ingredients: ['tortilla', 'chicken', 'cheese'],
@@ -87,7 +92,7 @@ function App() {
         <Route path="/meal_plan" element={<MealPlan recipeList={recipeList} ingredientList={ingredientList}/>} />
         <Route path="/grocery_list" element={<GroceryList />} />
         <Route path="/account" element={<Account/>} />
-        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/signup" element={<SignUp ingredientList={ingredientList} groceryList={groceryList}/>} />
         <Route path="/login" element={<Login/>} />
 
       </Routes>

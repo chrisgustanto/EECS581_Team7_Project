@@ -9,7 +9,7 @@ import { doc, getDoc } from "firebase/firestore";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
 //init services
-const db = getFirestore()
+// const database = getFirestore()
 
 const wordStyle = {
     fontFamily: "Rockwell",

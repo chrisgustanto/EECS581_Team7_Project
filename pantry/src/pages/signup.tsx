@@ -1,19 +1,29 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
 import { addDoc, collection, getFirestore } from "@firebase/firestore"
-import { firestore, firebaseApp, db } from "../firebase_setup/firebase"
+// import { firestore, firebaseApp, database } from "../firebase_setup/firebase"
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { colors } from "@mui/material";
 import {Routes, Route, useNavigate} from 'react-router-dom';
+import { IngredientInterface, GroceryListInterface } from "./../interfaces";
 //import firebase from "@firebase/firestore";
 
+import { firebaseApp } from "../firebase_setup/firebase";
+import { database } from "../firebase_setup/firebase";
+
+
+interface Props {
+  ingredientList: IngredientInterface[];
+  groceryList: GroceryListInterface[];
+}
+
 //init services
-// const db = getFirestore(firebaseApp)
-const auth = getAuth()
+// const database = getFirestore(firebaseApp)
+const auth = getAuth(firebaseApp)
 
 const wordStyle = {
     fontFamily: "Rockwell",
@@ -21,7 +31,7 @@ const wordStyle = {
     fontSize: "25px",
 };
 
-  const SignUp = () => {
+  const SignUp: FunctionComponent<Props> = ({ ingredientList, groceryList }) => {
   const [username, setUsername] =  useState("");
   const [emailConfirmation, setEmailConfirmation] =  useState("");
   const [email, setEmail] =  useState("");
@@ -60,7 +70,7 @@ const wordStyle = {
         } else {
           if(tempEmail == tempEmailConfirmation){
             if(validateEmail(tempEmail)){
-              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword };
+              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword, ingredientList: ingredientList, groceryList: groceryList};
               
               // const ref = collection(firestore, "UserData")
 
@@ -68,13 +78,13 @@ const wordStyle = {
                 .then((userCredential) => {
                   
                   // try {
-                  setDoc(doc(db, "UserData", userCredential.user.uid), newUser);
+                  setDoc(doc(database, "UserData", userCredential.user.uid), newUser);
                   // } catch (err) {
                   //     console.log("error: ")
                   //     console.log(err)
                   // }
                   
-                  // const ref = collection(db, "UserData", userCredential.user.uid)
+                  // const ref = collection(database, "UserData", userCredential.user.uid)
                   // try {
                   //   addDoc(ref, newUser)
                   //   console.log("sent user data")
@@ -98,7 +108,7 @@ const wordStyle = {
                         // console.log(username);
                         // console.log(email);
                         // console.log("user added to userdata")
-                        // await setDoc(doc(db, "UserData", ), newUser);
+                        // await setDoc(doc(database, "UserData", ), newUser);
                         // const ref = collection(firestore, "UserData", user.uid)
                         // try {
                         //   addDoc(ref, newUser)
