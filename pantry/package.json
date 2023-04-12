@@ -15,7 +15,7 @@
     "@types/react-dom": "^18.0.6",
     "button": "^1.1.1",
     "express": "^4.18.2",
-    "firebase": "^9.17.1",
+    "firebase": "^9.19.1",
     "iconv-lite": "^0.6.3",
     "js-sdsl": "^4.2.0",
     "multiselect-react-dropdown": "^2.0.25",

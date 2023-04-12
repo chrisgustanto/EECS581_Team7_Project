@@ -12,6 +12,13 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { addDoc, collection, getFirestore, doc, getDoc, setDoc, getDocs, QuerySnapshot } from "@firebase/firestore"
+import { database } from "../firebase_setup/firebase";
+import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { firebaseApp } from "../firebase_setup/firebase";
+//import { db } from "../../firebase/config";
+//init services
+const auth = getAuth(firebaseApp);
 
 const baseStyle = {
   backgroundColor: "white",
@@ -40,22 +47,91 @@ const GroceryList = () => {
 
   const [myArray, setMyArray] = useState<GroceryListInterface[]>([]);
 
+  
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+      const docRef = doc(database, "UserData", user.uid)
+      if(true){
+        getDoc(docRef)
+        .then((doc) => {
+        
+          if(doc.exists()){
+          
+            setMyArray(doc.data().groceryList)                                    
+          } else {
+            console.log("empty doc")
+          }
+        })
+      }    
+    }  
+    
+  })
+  
+
   //create new grocery list object and push it to array
+  //modifiyed to add to database
   function addGroceries(
     tempName: string,
     tempQuantity: number,
     tempId: number
   ) {
+  
+    for (var item of myArray) {
+      if(tempName==item.name){
+        if(item.quantity == null){
+          item.quantity=0;
+        }
+        item.quantity = item.quantity + tempQuantity
+        return
+      }
+    }
     let ingr = { name: tempName, quantity: tempQuantity, id: tempId };
     myArray.push(ingr);
+    /*
+    let ingr = { name: tempName, quantity: tempQuantity};
 
-    console.log("-");
-    console.log(myArray[tempId]);
-    console.log(myArray[tempId - 1]);
-    console.log(myArray[tempId - 2]);
-    console.log("-");
-    setId(id + 1);
+    const ref = collection(database, "groveryListItems")
+    try {
+      addDoc(ref, ingr)
+      console.log("sent user data")
+    } catch (err) {
+      console.log("error: ")
+      console.log(err)
+    }
+    */
+    checkLoggedIn();
   }
+
+  function checkLoggedIn(): boolean {
+    auth.onAuthStateChanged(user => {
+      if(user) {
+        console.log('logged in');
+        updateDatabase(user.email!);
+        return true;
+      } else {
+        console.log('not logged in');
+        return false;
+      }
+    })
+    return false;
+  }
+
+  function updateDatabase(userEmail: string) {
+    // console.log(auth.currentUser);
+    const colRef = collection(database, 'UserData');
+    getDocs(colRef).then(querySnap => {
+      querySnap.docs.forEach(docSnap => {
+        // console.log(docSnap.data());
+        if(docSnap.data().email == userEmail) {
+          // console.log(docSnap.data());
+          let newUserData = {...docSnap.data(), groceryList: myArray};
+          setDoc(doc(database, 'UserData', auth.currentUser!.uid), newUserData);
+        }
+      })
+    })
+  }
+
+  
 
   return (
     <Grid

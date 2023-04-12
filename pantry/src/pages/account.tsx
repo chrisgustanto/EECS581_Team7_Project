@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { SignUpInterface } from "./../interfaces";
 import { addDoc, collection, getFirestore } from "@firebase/firestore"
-import { firestore, firebaseApp, db } from "../firebase_setup/firebase"
+import { firestore, firebaseApp, database } from "../firebase_setup/firebase"
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { colors } from "@mui/material";
@@ -13,7 +13,7 @@ import { FirebaseError } from "firebase/app";
 
 
 //init services
-//const db = getFirestore()
+//const database = getFirestore()
 const auth = getAuth()
 
 const wordStyle = {
@@ -43,7 +43,7 @@ const Account = () => {
       // const myUser = auth.currentUser;
 
       // get a single document
-      // const docRef = doc(db, "UserData", )
+      // const docRef = doc(database, "UserData", )
 
       onAuthStateChanged(auth, (user) => {
             if(user){
@@ -53,7 +53,7 @@ const Account = () => {
                   console.log(myusername);
                   console.log(email);
 
-                  const docRef = doc(db, "UserData", user.uid)
+                  const docRef = doc(database, "UserData", user.uid)
 
                   getDoc(docRef)
                         .then((doc) => {

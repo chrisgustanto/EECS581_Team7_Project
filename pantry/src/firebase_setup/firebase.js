@@ -25,10 +25,10 @@ const analytics = getAnalytics(firebaseApp);
 export const firestore = getFirestore(firebaseApp);
 
 //initialize services
-export const db = getFirestore(firebaseApp)
+export const database = getFirestore(firebaseApp)
 
 //collection ref
-const colRef = collection(db, 'UserData')
+const colRef = collection(database, 'UserData')
 
 //get collection data
 getDocs(colRef)
