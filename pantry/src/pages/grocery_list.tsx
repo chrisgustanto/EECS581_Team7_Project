@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
-import { GroceryListInterface } from "./../interfaces";
+import { GroceryListInterface, IngredientInterface } from "./../interfaces";
 import { TableContainer } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -46,7 +46,7 @@ const GroceryList = () => {
   const [id, setId] = useState<number>(0);
 
   const [myArray, setMyArray] = useState<GroceryListInterface[]>([]);
-
+  const [ingrArray, setIngr] = useState<IngredientInterface[]>([]);
   
   onAuthStateChanged(auth, (user) => {
     if(user){
@@ -57,7 +57,8 @@ const GroceryList = () => {
         
           if(doc.exists()){
           
-            setMyArray(doc.data().groceryList)                                    
+            setMyArray(doc.data().groceryList)    
+            setIngr(doc.data().ingredientList)                                
           } else {
             console.log("empty doc")
           }
@@ -67,6 +68,18 @@ const GroceryList = () => {
     
   })
   
+  //clears grocery list array and updates firebase
+  function clearGroceries() {
+    setMyArray([]);
+    checkLoggedIn()
+  }
+
+  function sendToIngrdients() {
+    for (var item of myArray) {
+      ingrArray.push(item);
+    }
+    clearGroceries();
+  }
 
   //create new grocery list object and push it to array
   //modifiyed to add to database
@@ -124,7 +137,7 @@ const GroceryList = () => {
         // console.log(docSnap.data());
         if(docSnap.data().email == userEmail) {
           // console.log(docSnap.data());
-          let newUserData = {...docSnap.data(), groceryList: myArray};
+          let newUserData = {...docSnap.data(), groceryList: myArray, ingrdientList: ingrArray};
           setDoc(doc(database, 'UserData', auth.currentUser!.uid), newUserData);
         }
       })
@@ -181,6 +194,26 @@ const GroceryList = () => {
             onClick={() => addGroceries(name, quantity!, id)}
           >
             Enter
+          </Button>
+        </Grid>
+
+        {/* clear groceries button */}
+        <Grid item xs={8}>
+          <Button
+            variant="contained"
+            onClick={() => clearGroceries()}
+          >
+            Clear
+          </Button>
+        </Grid>
+
+        {/* send groceries to ingrdients button */}
+        <Grid item xs={8}>
+          <Button
+            variant="contained"
+            onClick={() => sendToIngrdients()}
+          >
+            Send All to Pantry
           </Button>
         </Grid>
 
