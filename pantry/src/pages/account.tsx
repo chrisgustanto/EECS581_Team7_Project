@@ -90,6 +90,14 @@ const Account = () => {
       // }, [])
 
       function logout(){
+            signOut(auth)
+                  .then(() => {
+                        console.log("user logged out")
+                  })
+                  .catch((err) => {
+                        console.log(err.message)
+                  })
+                  
             console.log("logged out");
             window.location.replace('http://localhost:3000/login');
       }

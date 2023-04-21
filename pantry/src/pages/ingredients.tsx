@@ -54,16 +54,23 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      // console.log("A user is signed in");
       const docRef = doc(database, "UserData", user.uid);
       if (true) {
         getDoc(docRef).then((doc) => {
           if (doc.exists()) {
             setMyArray(doc.data().ingredientList);
+            // console.log("there are ingredients")
           } else {
             console.log("empty doc");
+            // setMyArray([]);
           }
         });
       }
+    }
+    else {
+      console.log("No user is signed in");
+      // setMyArray([]);
     }
   });
 
@@ -116,6 +123,7 @@ const Ingredients: FunctionComponent<Props> = ({ ingredientList }) => {
         return true;
       } else {
         console.log("not logged in");
+        // setMyArray([]);
         return false;
       }
     });
