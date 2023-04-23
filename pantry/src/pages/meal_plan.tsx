@@ -142,6 +142,8 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
       noValidate
       autoComplete="off"
     >
+      <div className="flexbox-container">
+      <div>
       <h3> Select Dietary Restrictions</h3>
       <Box display="block">
         {dietRestriction.map((restriction, index) => {
@@ -161,7 +163,8 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
       <Button variant="contained" onClick={applyRestrictions}>
         Confirm dietary restrictions
       </Button>
-
+      </div>
+      <div>
       <Grid item xs={8}>
         <h3> Recipes </h3>
         {recipeList.map((item, index) => (
@@ -172,6 +175,8 @@ const MealPlan: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
           </div>
         ))}
       </Grid>
+      </div>
+      </div>
       <h3> Choose Your Meals For The Week: </h3>
       <div className="flexbox-container">
         <div>
