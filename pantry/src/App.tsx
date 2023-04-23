@@ -24,34 +24,36 @@ import AddItem from "./handlers/AddItem"; // on change
 function App() {
 
   //example ingredient list
-  const [ingredientList, setIngredientList] = useState<IngredientInterface[]>([{
-    name: 'chicken',
-    quantity: 1
-  }, {
-    name: 'beef',
-    quantity: 2
-  }, {
-    name: 'flour',
-    quantity: 3
-  }, {
-    name: 'butter',
-    quantity: 4
-  }, {
-    name: 'egg',
-    quantity: 5
-  }, {
-    name: 'bun',
-    quantity: 6
-  }, {
-    name: 'cheese',
-    quantity: 7
-  }, {
-    name: 'tortilla',
-    quantity: 8
-  }, {
-    name: 'chocolate',
-    quantity: 9
-  }]);
+  // const [ingredientList, setIngredientList] = useState<IngredientInterface[]>([{
+  //   name: 'chicken',
+  //   quantity: 1
+  // }, {
+  //   name: 'beef',
+  //   quantity: 2
+  // }, {
+  //   name: 'flour',
+  //   quantity: 3
+  // }, {
+  //   name: 'butter',
+  //   quantity: 4
+  // }, {
+  //   name: 'egg',
+  //   quantity: 5
+  // }, {
+  //   name: 'bun',
+  //   quantity: 6
+  // }, {
+  //   name: 'cheese',
+  //   quantity: 7
+  // }, {
+  //   name: 'tortilla',
+  //   quantity: 8
+  // }, {
+  //   name: 'chocolate',
+  //   quantity: 9
+  // }]);
+
+  const [ingredientList, setIngredientList] = useState<IngredientInterface[]>([]);
 
   const [groceryList, setGroceryList] = useState<IngredientInterface[]>([]);
 

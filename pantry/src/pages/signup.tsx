@@ -79,66 +79,15 @@ const wordStyle = {
                   
                   // try {
                   setDoc(doc(database, "UserData", userCredential.user.uid), newUser);
-                  // } catch (err) {
-                  //     console.log("error: ")
-                  //     console.log(err)
-                  // }
-                  
-                  // const ref = collection(database, "UserData", userCredential.user.uid)
-                  // try {
-                  //   addDoc(ref, newUser)
-                  //   console.log("sent user data")
-                  // } catch (err) {
-                  //   console.log("error: ")
-                  //   console.log(err)
-                  // }
+
                   console.log("user created: ", userCredential.user)
                   navigateToAccount();
-                  // window.location.href="http://localhost:3000/account";
+
                 })
                 .catch((err) => {
                   console.log(err.message)
                 });
                 
-                // onAuthStateChanged(auth, (user) => {
-                //   if(user){
-                        // const userUID = user.uid;
-                        // const username = user.displayName;
-                        // const email = user.email;
-                        // console.log(username);
-                        // console.log(email);
-                        // console.log("user added to userdata")
-                        // await setDoc(doc(database, "UserData", ), newUser);
-                        // const ref = collection(firestore, "UserData", user.uid)
-                        // try {
-                        //   addDoc(ref, newUser)
-                        //   console.log("sent user data")
-                        // } catch (err) {
-                        //   console.log("error: ")
-                        //   console.log(err)
-                        // }
-
-                //   } else {
-                //         console.log("No user is signed in");
-                //   }
-                // })
-
-              // const ref = collection(firestore, "UserData") // Firebase creates this automatically 
-              
-              // window.location.replace('http://localhost:3000/account');
-              // window.location.href="http://localhost:3000/account";
-              
-
-              // try {
-              //   addDoc(ref, newUser)
-              //   console.log("sent user data")
-              // } catch (err) {
-              //   console.log(err)
-              // }
-              
-              
-
-            //myArray.push(newUser);
             } else {
               alert("not valide email")
             }
@@ -222,22 +171,6 @@ const wordStyle = {
             
         }
         
-        {/* {
-          showAcc && 
-          <p>
-            <h2 style={wordStyle}>Account Details</h2>
-
-            <form>
-              <label htmlFor="username">username: {username}</label>
-              <p></p>
-              <label htmlFor="email">email: {email}</label>
-              <p></p>
-            </form>
-            <Button variant="contained" onClick={() => logout()}>Log Out</Button>
-          </p>
-        } */}
-
-
 
       </div>
     </Box>

@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav, NavLink, NavMenu }
 	from "./NavbarElements";
+import { getAuth, onAuthStateChanged} from "firebase/auth";
+
 
 const Navbar = () => {
+
+	const auth = getAuth()
+
+	const[userState, setUserState] = useState()
+
+	onAuthStateChanged(auth, (user) => {
+            if(user){
+			console.log("user is signed in!!");
+			setUserState(true);
+		} else {
+                  console.log("No user is signed in");
+			setUserState(false);
+            }
+      })
+
 return (
 	<>
 	<Nav>
@@ -23,12 +40,17 @@ return (
 			<NavLink to="/grocery_list" activeStyle>
 				Grocery List
 			</NavLink>
-			{/* <NavLink to="/signup" activeStyle>
+			{userState === true &&
+				<NavLink to="/account" activeStyle>
 				Account
-			</NavLink> */}
-			<NavLink to="/login" activeStyle>
+				</NavLink>
+			}
+
+			{userState === false &&
+				<NavLink to="/login" activeStyle>
 				Account
-			</NavLink>
+				</NavLink>
+			}
 		</NavMenu>
 	</Nav>
 	</>

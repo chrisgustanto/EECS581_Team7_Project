@@ -28,22 +28,6 @@ const Account = () => {
       const [currentUsername,setCurrentUsername] = useState()
       const [currentEmail,setCurrentEmail] = useState()
       
-      // const user = auth.currentUser;
-
-      // setCurrentUser(auth.currentUser)
-      
-      // if(user != null){
-      //       const username = user.displayName;
-      //       const email = user.email;
-      //       const uid = user.uid;
-      // } else {
-      //       console.log("No user is signed in");
-      // }
-      
-      // const myUser = auth.currentUser;
-
-      // get a single document
-      // const docRef = doc(database, "UserData", )
 
       onAuthStateChanged(auth, (user) => {
             if(user){
@@ -69,25 +53,12 @@ const Account = () => {
                               }
                         })
 
-                  // onSnapshot(docRef, (doc) => {
-                  //       console.log(doc.data(), doc.id)
-                  // })
+
             } else {
                   console.log("No user is signed in");
             }
       })
       
-
-      // useEffect(() => {
-      //       onAuthStateChanged(auth, (user) => {
-      //             if(user){
-      //                   // const userUID = user.uid;
-                        
-      //             } else {
-      //                   console.log("No user is signed in");
-      //             }
-      //       })
-      // }, [])
 
       function logout(){
             signOut(auth)
