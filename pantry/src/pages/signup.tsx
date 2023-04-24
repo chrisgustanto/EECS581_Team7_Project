@@ -69,7 +69,8 @@ const wordStyle = {
         } else {
           if(tempEmail == tempEmailConfirmation){
             if(validateEmail(tempEmail)){
-              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword, ingredientList: ingredientList };
+              let savedRecipes: number[] = [];
+              let newUser = { username: tempUsername, email: tempEmail, password: tempPassword, ingredientList: ingredientList, savedRecipes: savedRecipes };
               
               // const ref = collection(firestore, "UserData")
 

@@ -17,6 +17,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 
 	const [checkedIngredients, setcheckedIngredients] = useState<string[]>([]);
 	const [recipeData, setRecipeData] = useState<apiRecipeInterface[]>([]);
+	const [savedRecipes, setSavedRecipes] = useState<number[]>([]);
 
 	//add custom recipe to user recipe list, need proper interfacing between user recipes and spoonacular recipes
 	function addRecipe(inputName: string, inputIngredients: string[], inputDirections: string) {
@@ -110,7 +111,7 @@ const Recipes: FunctionComponent<Props> = ({ recipeList, ingredientList }) => {
 				</Button>
 
 				{/* display recipes retrieved from spoonacular api */}
-				{recipeData.length>0 && <RecipeList recipeData={recipeData} />}
+				{recipeData.length>0 && <RecipeList recipeData={recipeData} savedRecipes={savedRecipes} />}
 				
 			</Grid>
 		</>
