@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GroceryListInterface } from "./../interfaces";
+import { GroceryListInterface, IngredientInterface } from "./../interfaces";
 import {
   Box,
   Grid,
@@ -55,6 +55,7 @@ const GroceryList = () => {
   const [id, setId] = useState<number>(0);
 
   const [myArray, setMyArray] = useState<GroceryListInterface[]>([]);
+  const [myIngrArray, setMyIngrArray] = useState<IngredientInterface[]>([]);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -63,6 +64,7 @@ const GroceryList = () => {
         getDoc(docRef).then((doc) => {
           if (doc.exists()) {
             setMyArray(doc.data().groceryList);
+            setMyIngrArray(doc.data().ingredientList);
           } else {
             console.log("empty doc");
           }
@@ -70,6 +72,39 @@ const GroceryList = () => {
       }
     }
   });
+
+
+  function clearGroceries() {    
+    setMyArray((current) => current.filter(() => false));
+    checkLoggedIn();
+  }
+
+  function sendGroceries(tempId: number) {
+    let same = false;
+    for (var gItem of myArray) {
+      if (gItem.quantity == null) {
+        gItem.quantity = 0;
+      }
+      for (var item of myIngrArray) {
+        if (gItem.name == item.name) {
+          if (item.quantity == null) {
+            item.quantity = 0;
+          }
+          item.quantity = item.quantity + gItem.quantity;
+          same = true;      
+          break; 
+        }
+      }
+      if (!same) {
+        let ingr = { name: gItem.name, quantity: gItem.quantity, id: tempId };
+        myIngrArray.push(ingr);
+      }
+      
+    }
+    
+    clearGroceries();
+    checkLoggedIn();
+  }
 
   //create new grocery list object and push it to array
   //modifiyed to add to database
@@ -89,18 +124,7 @@ const GroceryList = () => {
     }
     let ingr = { name: tempName, quantity: tempQuantity, id: tempId };
     myArray.push(ingr);
-    /*
-    let ingr = { name: tempName, quantity: tempQuantity};
-
-    const ref = collection(database, "groveryListItems")
-    try {
-      addDoc(ref, ingr)
-      console.log("sent user data")
-    } catch (err) {
-      console.log("error: ")
-      console.log(err)
-    }
-    */
+    
     checkLoggedIn();
   }
 
@@ -126,12 +150,15 @@ const GroceryList = () => {
         // console.log(docSnap.data());
         if (docSnap.data().email == userEmail) {
           // console.log(docSnap.data());
-          let newUserData = { ...docSnap.data(), groceryList: myArray };
+          let newUserData = { ...docSnap.data(), groceryList: myArray, IngredientList: myIngrArray };
           setDoc(doc(database, "UserData", auth.currentUser!.uid), newUserData);
+
         }
       });
     });
   }
+
+
 
   return (
     <Grid
@@ -186,6 +213,26 @@ const GroceryList = () => {
         </Button>
       </Grid>
 
+      {/* clear groceries button */}
+      <Grid item xs={8}>
+        <Button
+          variant="contained"
+          onClick={() => clearGroceries()}
+        >
+          Clear
+        </Button>
+      </Grid>
+
+      {/* send groceries to ingredients button */}
+      <Grid item xs={8}>
+        <Button
+          variant="contained"
+          onClick={() => sendGroceries(id)}
+        >
+          Send to Ingredients
+        </Button>
+      </Grid>
+
       {/* display grocery list */}
       <Grid item xs={8}>
         <h3> Grocery List </h3>
@@ -211,7 +258,11 @@ const GroceryList = () => {
           </Table>
         </TableContainer>
       </Grid>
-    </Grid>
+
+
+
+
+    </Grid> 
   );
 };
 export default GroceryList;
